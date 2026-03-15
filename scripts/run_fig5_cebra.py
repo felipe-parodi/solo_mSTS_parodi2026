@@ -49,6 +49,10 @@ from freemat.single_fm.data.session_loader import SingleFMSessionLoader  # noqa:
 from freemat.single_fm.encoding.stats import circular_shift_indices  # noqa: E402, F401
 from freemat_data import load_motifs_from_session  # noqa: E402
 
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", message=".*lbfgs failed to converge.*")
+warnings.filterwarnings("ignore", message=".*y_pred contains classes not in y_true.*")
+
 # ── Configuration ─────────────────────────────────────────────────────────
 
 SESSION_CONFIGS = {
