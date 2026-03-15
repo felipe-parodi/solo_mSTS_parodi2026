@@ -1,4 +1,4 @@
-# mSTS Encodes Self-Motion
+# Primate mSTS encodes self-behavior and position
 
 Analysis code for: **Mid-superior temporal sulcus encodes spatial context and behavioral state in freely moving macaques**
 
