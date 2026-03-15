@@ -39,8 +39,7 @@ _LEGEND_KW: Dict[str, Any] = dict(
 # Default schematic path (relative to project root)
 _SCHEMATIC_PATH = (
     Path(__file__).resolve().parent.parent.parent.parent
-    / "results" / "single_fm" / "publication_figures"
-    / "main" / "fig5" / "fig5_cebra_schematic.png"
+    / "notebooks" / "assets" / "fig5_cebra_schematic.png"
 )
 
 

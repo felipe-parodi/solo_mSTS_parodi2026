@@ -33,8 +33,11 @@ from freemat.single_fm.viz.pub_data import (
 # Default schematic path (relative to project root)
 _SCHEMATIC_PATH = (
     Path(__file__).resolve().parent.parent.parent.parent
-    / "results" / "single_fm" / "publication_figures"
-    / "main" / "fig3" / "fig3_reference_frame_schematic.png"
+    / "notebooks" / "assets" / "fig3_reference_frame_schematic.png"
+)
+_PIE_CHART_PATH = (
+    Path(__file__).resolve().parent.parent.parent.parent
+    / "notebooks" / "assets" / "fig3_pie_charts.png"
 )
 
 
@@ -415,7 +418,15 @@ def fig3_composite(
     _draw_panel_a_schematic(ax_a)
 
     ax_b = fig.add_subplot(row0[0, 1])
-    _draw_placeholder(ax_b, "Pie charts")
+    # Embed pie chart image (same approach as schematic in Panel A)
+    if _PIE_CHART_PATH.exists():
+        img = plt.imread(str(_PIE_CHART_PATH))
+        ax_b.imshow(img, aspect="equal")
+    else:
+        _draw_placeholder(ax_b, "Pie charts\n(not found)")
+    ax_b.set_xticks([])
+    ax_b.set_yticks([])
+    ax_b.axis("off")
 
     ax_c = fig.add_subplot(row0[0, 2])
     ax_c.set_box_aspect(0.85)
