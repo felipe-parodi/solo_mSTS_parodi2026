@@ -8,7 +8,7 @@ correlates with the JS divergence of their stay-vs-switch future distributions.
 Usage:
     python scripts/single_fm/run_fig5_coarse_affordance.py \
         --sessions M2_0526 M2_0605 \
-        --output-dir results/single_fm/fig5_coarse_affordance
+        --output-dir results/fig5_coarse_affordance
 
 Author: Felipe Parodi + Claude
 """
@@ -62,13 +62,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--embeddings-dir",
         type=str,
-        default="results/single_fm/fig5_cebra_v2",
+        default="results/fig5_cebra_v2",
         help="Directory containing per-session embeddings.npz files.",
     )
     parser.add_argument(
         "--output-dir",
         type=str,
-        default="results/single_fm/fig5_coarse_affordance",
+        default="results/fig5_coarse_affordance",
         help="Directory for per-session and aggregate outputs.",
     )
     parser.add_argument("--window-bins", type=int, default=4,

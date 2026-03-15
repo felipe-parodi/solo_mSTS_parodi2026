@@ -32,7 +32,7 @@ SCRIPT="scripts/single_fm/run_matched_subsample_control.py"
 
 # Timestamped output directory
 TIMESTAMP=$(date +%Y%m%d_%H%M)
-PROD_DIR="results/single_fm/matched_subsample_control/production_${TIMESTAMP}"
+PROD_DIR="results/matched_subsample_control/production_${TIMESTAMP}"
 mkdir -p "$PROD_DIR"
 
 # Common flags: CPU parallel with 8 workers (n_jobs=-1 causes OOM)

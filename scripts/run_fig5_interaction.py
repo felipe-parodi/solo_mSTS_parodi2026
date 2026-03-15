@@ -37,11 +37,11 @@ from freemat_data import load_motifs_from_session  # noqa: E402
 
 
 SESSION_CONFIGS: Dict[str, str] = {
-    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
-    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
-    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
-    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M2_0526": "configs/session_M2_0526.yaml",
+    "M2_0605": "configs/session_M2_0605.yaml",
+    "M1_0525": "configs/session_M1_0525.yaml",
+    "M1_0609": "configs/session_M1_0609.yaml",
+    "M1_0613": "configs/session_M1_0613.yaml",
 }
 
 ALL_SESSIONS: List[str] = list(SESSION_CONFIGS.keys())
@@ -62,7 +62,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output-dir",
         type=str,
-        default="results/single_fm/fig5_interaction",
+        default="results/fig5_interaction",
         help="Directory for per-session and aggregate outputs.",
     )
     parser.add_argument("--bin-s", type=float, default=0.5)

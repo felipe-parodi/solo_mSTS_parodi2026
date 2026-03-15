@@ -26,7 +26,7 @@ set -euo pipefail
 export PYTHONUNBUFFERED=1
 
 TIMESTAMP=$(date +%Y%m%d_%H%M)
-BASE_OUTPUT="results/single_fm/production_${TIMESTAMP}"
+BASE_OUTPUT="results/production_${TIMESTAMP}"
 LOG_DIR="logs/overnight_${TIMESTAMP}"
 
 mkdir -p "${LOG_DIR}"
@@ -50,7 +50,7 @@ if [[ "${1:-}" == "--smoke" ]]; then
     echo ""
     echo "[SMOKE] Quick test: Fig 3 + Fig 2B on M2_0526 only"
     echo ""
-    SMOKE_OUTPUT="results/single_fm/smoke_overnight_${TIMESTAMP}"
+    SMOKE_OUTPUT="results/smoke_overnight_${TIMESTAMP}"
 
     # Fig 3 smoke
     echo "[SMOKE] Fig 3: M2_0526, 0.5s bins..."

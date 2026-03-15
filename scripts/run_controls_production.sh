@@ -37,11 +37,11 @@ conda activate mucal3
 
 # Timestamped output directory
 TIMESTAMP=$(date +%Y%m%d_%H%M)
-CTRL_DIR="results/single_fm/controls_production_${TIMESTAMP}"
+CTRL_DIR="results/controls_production_${TIMESTAMP}"
 mkdir -p "$CTRL_DIR"
 
 # ── Configuration ────────────────────────────────────────────────────────
-BASELINE_DIR="results/single_fm/production_20260209_2301/all4_bin05"
+BASELINE_DIR="results/production_20260209_2301/all4_bin05"
 ALL_SESSIONS="M2_0526 M2_0605 M1_0525 M1_0609 M1_0613"
 HEDY_SESSIONS="M2_0526 M2_0605"
 HOOKE_SESSIONS="M1_0525 M1_0609 M1_0613"

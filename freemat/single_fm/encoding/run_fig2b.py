@@ -6,8 +6,8 @@ Computes delta CV-R² for KIN vs VIS predictor families.
 Usage:
     >>> from freemat.single_fm.encoding.run_fig2b import run_fig2b_encoding
     >>> results_df = run_fig2b_encoding(
-    ...     session_yaml="configs/single_fm/session_M1_0525.yaml",
-    ...     output_dir="results/single_fm/240525",
+    ...     session_yaml="configs/session_M1_0525.yaml",
+    ...     output_dir="results/240525",
     ...     bin_s=0.5,
     ...     n_perm=1000,
     ... )

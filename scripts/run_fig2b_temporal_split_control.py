@@ -10,15 +10,15 @@ Usage:
     # Smoke test (1 session, 20 perms)
     python scripts/single_fm/run_fig2b_temporal_split_control.py \
         --sessions M2_0526 --n-perm 20 \
-        --output-dir results/single_fm/temporal_split_smoke \
+        --output-dir results/temporal_split_smoke \
         --use-gpu --debug
 
     # Full production (all 5 sessions, 100 perms)
     python scripts/single_fm/run_fig2b_temporal_split_control.py \
         --sessions M2_0526 M2_0605 M1_0525 M1_0609 M1_0613 \
         --n-perm 100 --n-perm-null 0 \
-        --baseline-dir results/single_fm/production_20260209_2301/all4_bin05 \
-        --output-dir results/single_fm/temporal_split_control \
+        --baseline-dir results/production_20260209_2301/all4_bin05 \
+        --output-dir results/temporal_split_control \
         --use-gpu
 """
 
@@ -49,11 +49,11 @@ _CANONICAL_TSV = str(_PROJECT_ROOT / "docs" / "inf_start_stop_times.tsv")
 
 # Session configuration mapping (matches run_rssi_control.py)
 SESSIONS: Dict[str, str] = {
-    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
-    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
-    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
-    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M2_0526": "configs/session_M2_0526.yaml",
+    "M2_0605": "configs/session_M2_0605.yaml",
+    "M1_0525": "configs/session_M1_0525.yaml",
+    "M1_0609": "configs/session_M1_0609.yaml",
+    "M1_0613": "configs/session_M1_0613.yaml",
 }
 
 SESSION_OUTPUT_DIRS: Dict[str, str] = {

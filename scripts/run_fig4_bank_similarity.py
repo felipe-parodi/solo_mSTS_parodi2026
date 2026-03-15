@@ -10,7 +10,7 @@ This establishes whether banks differ in what drives neural confusion:
   - Dorsal → stronger pose similarity correlation (categorical discriminability)
   - Ventral → stronger transition adjacency correlation (sequential structure)
 
-Output: results/single_fm/fig4_bank_similarity/
+Output: results/fig4_bank_similarity/
 
 Usage:
     python scripts/single_fm/run_fig4_bank_similarity.py

@@ -5,33 +5,33 @@ Runs KIN vs VIS unique variance encoding analysis on all 5 single-FM sessions,
 aggregates results, and generates pooled summary figures.
 
 Sessions:
-- M1_0525: configs/single_fm/session_M1_0525.yaml
-- M2_0526: configs/single_fm/session_M2_0526.yaml
-- M2_0605: configs/single_fm/session_M2_0605.yaml
-- M1_0609: configs/single_fm/session_M1_0609.yaml
-- M1_0613: configs/single_fm/session_M1_0613.yaml
+- M1_0525: configs/session_M1_0525.yaml
+- M2_0526: configs/session_M2_0526.yaml
+- M2_0605: configs/session_M2_0605.yaml
+- M1_0609: configs/session_M1_0609.yaml
+- M1_0613: configs/session_M1_0613.yaml
 
 Usage:
     # Run all sessions with full permutations
     python scripts/single_fm/run_fig2b_all_sessions.py \
-        --output-dir results/single_fm \
+        --output-dir results \
         --n-perm 1000
 
     # Quick test with fewer permutations and diagnostics
     python scripts/single_fm/run_fig2b_all_sessions.py \
-        --output-dir results/single_fm \
+        --output-dir results \
         --n-perm 100 \
         --generate-diagnostics \
         --debug
 
     # Run specific sessions only
     python scripts/single_fm/run_fig2b_all_sessions.py \
-        --output-dir results/single_fm \
+        --output-dir results \
         --sessions M1_0525 M2_0526 \
         --n-perm 100
 
 Output Structure:
-    results/single_fm/
+    results/
     ├── single_0525_M1/
     │   ├── encoding/fig2b_unique_variance.parquet
     │   ├── figures/fig2b_*.{png,svg}
@@ -65,11 +65,11 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 # Session configuration mapping
 SESSIONS: Dict[str, str] = {
-    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
-    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
-    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
-    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M1_0525": "configs/session_M1_0525.yaml",
+    "M2_0526": "configs/session_M2_0526.yaml",
+    "M2_0605": "configs/session_M2_0605.yaml",
+    "M1_0609": "configs/session_M1_0609.yaml",
+    "M1_0613": "configs/session_M1_0613.yaml",
 }
 
 # Session ID to output dir mapping (matches expected session_id in YAMLs)
@@ -94,7 +94,7 @@ def parse_args() -> argparse.Namespace:
         "--output-dir",
         type=str,
         required=True,
-        help="Base output directory (e.g., results/single_fm)",
+        help="Base output directory (e.g., results)",
     )
     parser.add_argument(
         "--sessions",
@@ -314,7 +314,10 @@ def run_session(
     """
 
     from freemat.single_fm.encoding.run_fig2b import run_fig2b_encoding
-    from freemat.single_fm.viz.fig2b import generate_fig2b_panel_nway
+    try:
+        from freemat.single_fm.viz.fig2b import generate_fig2b_panel_nway
+    except ImportError:
+        generate_fig2b_panel_nway = None
 
     print(f"\n{'='*60}")
     print(f"[Batch] Processing session: {session_key}")
@@ -348,7 +351,7 @@ def run_session(
                 or "unique_body_kin" in results_df.columns
                 or "unique_body_kin_shuffle" in results_df.columns
             )
-            if _has_nway:
+            if _has_nway and generate_fig2b_panel_nway is not None:
                 generate_fig2b_panel_nway(
                     results_df,
                     figures_dir,
@@ -406,7 +409,10 @@ def run_all_configs(
     import pandas as pd
 
     from freemat.single_fm.encoding.run_fig2b import Fig2BConfig, aggregate_fig2b_results
-    from freemat.single_fm.viz.fig2b import generate_fig2b_panel_nway
+    try:
+        from freemat.single_fm.viz.fig2b import generate_fig2b_panel_nway
+    except ImportError:
+        generate_fig2b_panel_nway = None
 
     configs = [
         (False, False),  # Ridge, no drift
@@ -484,7 +490,7 @@ def run_all_configs(
                     or "unique_body_kin" in combined_df.columns
                     or "unique_body_kin_shuffle" in combined_df.columns
                 )
-                if has_nway:
+                if has_nway and generate_fig2b_panel_nway is not None:
                     generate_fig2b_panel_nway(
                         combined_df,
                         figures_dir,
@@ -506,13 +512,17 @@ def main() -> int:
     import pandas as pd
 
     from freemat.single_fm.encoding.run_fig2b import Fig2BConfig, aggregate_fig2b_results
-    from freemat.single_fm.viz.fig2b import (
-        generate_fig2b_panel,
-        generate_fig2b_panel_nway,
-        plot_fig2b_testard_boxplots,
-        plot_fig2c_unique_scatter,
-        compute_testard_summary,
-    )
+    try:
+        from freemat.single_fm.viz.fig2b import (
+            generate_fig2b_panel,
+            generate_fig2b_panel_nway,
+            plot_fig2b_testard_boxplots,
+            plot_fig2c_unique_scatter,
+            compute_testard_summary,
+        )
+        _HAS_VIZ = True
+    except ImportError:
+        _HAS_VIZ = False
 
     # Resolve flag conflicts
     floor_filter = args.floor_filter and not args.no_floor_filter
@@ -802,8 +812,8 @@ def main() -> int:
                     n_sig_vis = bank_df["sig_vis"].sum()
                     print(f"        {bank}: {n_bank} units, {n_sig_kin} KIN sig, {n_sig_vis} VIS sig")
 
-        # Generate aggregated figures
-        if not args.no_figures:
+        # Generate aggregated figures (requires viz modules)
+        if not args.no_figures and _HAS_VIZ:
             figures_dir = str(summary_dir / "figures")
             if use_3way and has_3way:
                 generate_fig2b_panel_nway(
@@ -840,9 +850,11 @@ def main() -> int:
                     effect_threshold=args.effect_threshold,
                 )
             print(f"\n[Batch] Aggregated figures saved to: {figures_dir}")
+        elif not args.no_figures:
+            print("[Batch] Skipping figures (viz modules not available)")
 
         # Save Testard-style summary parquet
-        if use_3way:
+        if use_3way and _HAS_VIZ:
             testard_summary = compute_testard_summary(combined_df)
             testard_path = str(summary_dir / "fig2b_testard_summary.parquet")
             testard_summary.to_parquet(testard_path, index=False)

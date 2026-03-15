@@ -9,18 +9,18 @@ Two modes:
 
 Example (post-hoc):
     python scripts/single_fm/run_fig3_rf_index.py \
-        --prod-dir results/single_fm/production_20260220_2019 \
-        --output-dir results/single_fm/fig3_rf \
+        --prod-dir results/production_20260220_2019 \
+        --output-dir results/fig3_rf \
         --sessions M2_0526 --debug
 
 Example (height-stratified):
     python scripts/single_fm/run_fig3_rf_index.py \
-        --prod-dir results/single_fm/production_20260220_2019 \
-        --output-dir results/single_fm/fig3_rf_height \
+        --prod-dir results/production_20260220_2019 \
+        --output-dir results/fig3_rf_height \
         --sessions M2_0526 \
         --height-stratify \
         --height-cuts -0.265 0.752 \
-        --canonical-alignment configs/single_fm/canonical_alignment.json \
+        --canonical-alignment configs/canonical_alignment.json \
         --debug
 """
 
@@ -51,11 +51,11 @@ from freemat.single_fm.viz.fig3_rf_panels import save_rf_index_panels  # noqa: E
 
 
 SESSIONS: Dict[str, str] = {
-    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
-    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
-    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
-    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M1_0525": "configs/session_M1_0525.yaml",
+    "M2_0526": "configs/session_M2_0526.yaml",
+    "M2_0605": "configs/session_M2_0605.yaml",
+    "M1_0609": "configs/session_M1_0609.yaml",
+    "M1_0613": "configs/session_M1_0613.yaml",
 }
 
 SESSION_OUTPUT_DIRS: Dict[str, str] = {

@@ -17,7 +17,7 @@ export PYTHONUNBUFFERED=1
 
 # Timestamp for output dirs and logs
 TIMESTAMP=$(date +%Y%m%d_%H%M)
-BASE_OUTPUT="results/single_fm/production_${TIMESTAMP}"
+BASE_OUTPUT="results/production_${TIMESTAMP}"
 LOG_DIR="logs/fig2b_production_${TIMESTAMP}"
 
 # Common flags
@@ -94,7 +94,7 @@ if [[ "${1:-}" == "--smoke" ]]; then
     echo "============================================================"
     echo "SMOKE TEST MODE: 1 session, 10 perms, 0.5s bins"
     echo "============================================================"
-    SMOKE_OUTPUT="results/single_fm/smoke_production_${TIMESTAMP}"
+    SMOKE_OUTPUT="results/smoke_production_${TIMESTAMP}"
     mkdir -p "${LOG_DIR}"
 
     CUDA_VISIBLE_DEVICES=0 ${RUNNER} \

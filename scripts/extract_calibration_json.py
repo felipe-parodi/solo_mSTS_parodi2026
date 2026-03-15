@@ -9,7 +9,7 @@ Usage:
     python scripts/single_fm/extract_calibration_json.py
 
 Output:
-    configs/single_fm/calibration_<session_id>.json per session
+    configs/calibration_<session_id>.json per session
 """
 from __future__ import annotations
 
@@ -31,11 +31,11 @@ from freemat.single_fm.data.session_loader import SingleFMSessionLoader  # noqa:
 
 
 SESSION_YAMLS = [
-    "configs/single_fm/session_M2_0526.yaml",
-    "configs/single_fm/session_M2_0605.yaml",
-    "configs/single_fm/session_M1_0525.yaml",
-    "configs/single_fm/session_M1_0609.yaml",
-    "configs/single_fm/session_M1_0613.yaml",
+    "configs/session_M2_0526.yaml",
+    "configs/session_M2_0605.yaml",
+    "configs/session_M1_0525.yaml",
+    "configs/session_M1_0609.yaml",
+    "configs/session_M1_0613.yaml",
 ]
 
 

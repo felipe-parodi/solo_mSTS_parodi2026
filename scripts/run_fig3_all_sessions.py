@@ -6,11 +6,11 @@ and displacement-to-center features.
 
 Usage:
     python scripts/single_fm/run_fig3_all_sessions.py \
-        --output-dir results/single_fm/fig3_ref_frames \
+        --output-dir results/fig3_ref_frames \
         --sessions M2_0526 M2_0605
 
     python scripts/single_fm/run_fig3_all_sessions.py \
-        --output-dir results/single_fm/fig3_ref_frames \
+        --output-dir results/fig3_ref_frames \
         --bin-s 0.25 --cv-folds 5
 """
 
@@ -37,11 +37,11 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 # Session configuration (same as Fig 2B)
 SESSIONS: Dict[str, str] = {
-    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
-    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
-    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
-    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M1_0525": "configs/session_M1_0525.yaml",
+    "M2_0526": "configs/session_M2_0526.yaml",
+    "M2_0605": "configs/session_M2_0605.yaml",
+    "M1_0609": "configs/session_M1_0609.yaml",
+    "M1_0613": "configs/session_M1_0613.yaml",
 }
 
 SESSION_OUTPUT_DIRS: Dict[str, str] = {

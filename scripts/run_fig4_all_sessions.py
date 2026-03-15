@@ -5,26 +5,26 @@ Runs motif tuning, decoding, and lag sweep on single-FM sessions,
 aggregates results, and saves per-session + summary outputs.
 
 Sessions (5 with ethograms):
-- M1_0525: configs/single_fm/session_M1_0525.yaml (hooke)
-- M2_0526: configs/single_fm/session_M2_0526.yaml
-- M2_0605: configs/single_fm/session_M2_0605.yaml (hedy)
-- M1_0609: configs/single_fm/session_M1_0609.yaml (hooke)
-- M1_0613: configs/single_fm/session_M1_0613.yaml (hooke)
+- M1_0525: configs/session_M1_0525.yaml (hooke)
+- M2_0526: configs/session_M2_0526.yaml
+- M2_0605: configs/session_M2_0605.yaml (hedy)
+- M1_0609: configs/session_M1_0609.yaml (hooke)
+- M1_0613: configs/session_M1_0613.yaml (hooke)
 
 Usage:
     # Quick pilot on one session (10 perms)
     python scripts/single_fm/run_fig4_all_sessions.py \
-        --output-dir results/single_fm/fig4_pilot \
+        --output-dir results/fig4_pilot \
         --sessions M2_0526 --n-perm 10 --debug
 
     # M2-only production run
     python scripts/single_fm/run_fig4_all_sessions.py \
-        --output-dir results/single_fm/fig4_hedy \
+        --output-dir results/fig4_hedy \
         --sessions M2_0526 M2_0605 --n-perm 1000
 
     # All 4 sessions production run
     python scripts/single_fm/run_fig4_all_sessions.py \
-        --output-dir results/single_fm/fig4_all4 --n-perm 1000
+        --output-dir results/fig4_all4 --n-perm 1000
 """
 
 from __future__ import annotations
@@ -45,11 +45,11 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 
 SESSIONS: Dict[str, str] = {
-    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
-    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
-    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
-    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M1_0525": "configs/session_M1_0525.yaml",
+    "M2_0526": "configs/session_M2_0526.yaml",
+    "M2_0605": "configs/session_M2_0605.yaml",
+    "M1_0609": "configs/session_M1_0609.yaml",
+    "M1_0613": "configs/session_M1_0613.yaml",
 }
 
 SESSION_OUTPUT_DIRS: Dict[str, str] = {

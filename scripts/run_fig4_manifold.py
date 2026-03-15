@@ -8,15 +8,15 @@ and block-shuffle null distribution.
 Usage:
     # Quick pilot on one session
     python scripts/single_fm/run_fig4_manifold.py \
-        --output-dir results/single_fm/fig4_manifold --sessions M2_0526 --quick
+        --output-dir results/fig4_manifold --sessions M2_0526 --quick
 
     # PCA-only (no umap-learn required)
     python scripts/single_fm/run_fig4_manifold.py \
-        --output-dir results/single_fm/fig4_manifold --sessions M2_0526 --no-umap
+        --output-dir results/fig4_manifold --sessions M2_0526 --no-umap
 
     # Full run on all sessions
     python scripts/single_fm/run_fig4_manifold.py \
-        --output-dir results/single_fm/fig4_manifold
+        --output-dir results/fig4_manifold
 """
 
 from __future__ import annotations
@@ -43,11 +43,11 @@ if str(_PROJECT_ROOT) not in sys.path:
 # Session mapping — copied from run_fig4_all_sessions.py (cross-script
 # imports are fragile for batch scripts).
 SESSIONS: Dict[str, str] = {
-    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
-    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
-    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
-    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M1_0525": "configs/session_M1_0525.yaml",
+    "M2_0526": "configs/session_M2_0526.yaml",
+    "M2_0605": "configs/session_M2_0605.yaml",
+    "M1_0609": "configs/session_M1_0609.yaml",
+    "M1_0613": "configs/session_M1_0613.yaml",
 }
 
 SESSION_OUTPUT_DIRS: Dict[str, str] = {

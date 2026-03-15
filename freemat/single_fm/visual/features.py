@@ -164,7 +164,7 @@ def _prefer_processed_pose(sref) -> Optional[str]:
         sref: SessionRef-like object with `session_id` attribute.
 
     Returns:
-        Path to `results/single_fm/<sid>/pose_processed.npz` if it exists, else None.
+        Path to `results/<sid>/pose_processed.npz` if it exists, else None.
     """
     sid = getattr(sref, "session_id", None)
     if not sid:
