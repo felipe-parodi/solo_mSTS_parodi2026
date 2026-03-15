@@ -35,8 +35,13 @@ matplotlib.use("Agg")
 import argparse
 import sys
 import time
+import warnings
 from pathlib import Path
 from typing import Dict
+
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", message=".*lbfgs failed to converge.*")
+warnings.filterwarnings("ignore", message=".*y_pred contains classes not in y_true.*")
 
 _SCRIPT_DIR = Path(__file__).resolve().parent
 _PROJECT_ROOT = _SCRIPT_DIR.parent

@@ -154,7 +154,6 @@ def lag_sweep_decoding(
                 class_weight="balanced",
                 max_iter=500,
                 random_state=random_state,
-                multi_class="multinomial",
                 solver="lbfgs",
             )
             clf.fit(X_train, y_train)
