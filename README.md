@@ -4,6 +4,10 @@ Analysis code for: **Mid-superior temporal sulcus encodes spatial context and be
 
 Parodi et al. (2026)
 
+![Figure 1](notebooks/assets/fig1_overview.png)
+
+> **Abstract.** Primate neuroscience has traditionally studied the brain under highly constrained conditions, limiting our understanding of neural function during real-world behavior. The mid-superior temporal sulcus (mSTS) is implicated in social perception, but its role during unconstrained behavior has not been tested. Here we performed wireless depth-electrode recordings from both banks of mSTS in macaques freely exploring a large three-dimensional arena, combined with 3D pose tracking and behavioral segmentation. Neural encoding models revealed mSTS firing rates were jointly modulated by spatial position, body kinematics, and geometric visual proxies, preferentially encoded in allocentric coordinates but with a shift toward body-centric encoding during vertical exploration. Neural populations carried decodable information about discrete behavioral syllables, with broad temporal generalization and neural similarity that tracked the sequential structure of behavior. Population manifold analysis revealed that the same behavior occupied different regions of population space at different spatial locations, and population dynamics showed structured organization around behavioral transitions. Together, these results suggest that mSTS populations carry joint information about spatial context and behavioral state during natural behavior.
+
 ## Overview
 
 This repository contains the complete analysis pipeline for reproducing all quantitative results (Figs 2-5) from neural and behavioral data. Two rhesus macaques (M1, M2) were recorded with wireless 128-channel arrays in mid-STS while freely navigating a hexagonal arena. The pipeline covers encoding models, reference frame analysis, behavioral motif decoding, and CEBRA manifold analysis.
