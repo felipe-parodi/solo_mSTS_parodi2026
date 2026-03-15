@@ -6,43 +6,7 @@ Parodi et al. (2026)
 
 ## Overview
 
-This repository contains the complete analysis pipeline for reproducing all results (Figs 2-5) from raw neural and behavioral data. Two rhesus macaques were recorded with wireless 128-channel arrays in mid-STS while freely navigating a hexagonal arena.
-
-## Data
-
-Raw data and pre-computed results are available on Zenodo (DOI: TBD).
-
-After downloading, place data in `data/` with this layout:
-
-```
-data/
-  240525-M1/
-    Neural_data_sorted_final.mat
-    pose3d_smoothed.npz
-    sync_map.json
-  240526-M2/
-    ...
-  240605-M2/
-    ...
-  240609-M1/
-    ...
-  240613-M1/
-    ...
-  motifs/
-    ethogram_final.parquet
-    clusters_summary.parquet
-    ...
-```
-
-Pre-computed results go in `results/`:
-
-```
-results/
-  production/          # Encoding/decoding parquets (Figs 2-4)
-  fig3_rf/             # Reference-frame index results
-  fig4_similarity/     # Neural-behavioral similarity
-  fig5_cebra/          # CEBRA manifold embeddings and results
-```
+This repository contains the complete analysis pipeline for reproducing all quantitative results (Figs 2-5) from neural and behavioral data. Two rhesus macaques (M1, M2) were recorded with wireless 128-channel arrays in mid-STS while freely navigating a hexagonal arena. The pipeline covers encoding models, reference frame analysis, behavioral motif decoding, and CEBRA manifold analysis.
 
 ## Installation
 
@@ -61,24 +25,58 @@ git clone https://github.com/AdaptiveMotorControlLab/CEBRA.git
 cd CEBRA && git checkout v0.4.0 && pip install -e . && cd ..
 ```
 
-## Reproduction
+## Data
 
-### From pre-computed results
+Raw data and pre-computed results are available on [Zenodo (DOI: TBD)]().
 
-Pre-computed parquets contain all numbers reported in the paper. Load them directly:
+After downloading, place files in the following layout:
 
-```python
-import pandas as pd
-fig2 = pd.read_parquet("results/production/M2_bin05/summary/fig2b_summary.parquet")
-fig3 = pd.read_parquet("results/production/fig3_bin05/summary/fig3_summary.parquet")
+```
+data/                          # Raw data (per session)
+  240525-M1/
+    Neural_data_sorted_final.mat
+    pose3d_smoothed.npz
+    sync_map.json
+  240526-M2/ ...
+  240605-M2/ ...
+  240609-M1/ ...
+  240613-M1/ ...
+  motifs/                      # Shared behavioral syllable labels
+    ethogram_final.parquet
+    clusters_summary.parquet
+    frames_map.parquet
+
+results/                       # Pre-computed analysis outputs
+  production/                  # Encoding/decoding parquets (Figs 2-4)
+  fig3_rf/                     # Reference-frame index results
+  fig4_similarity/             # Neural-behavioral similarity
+  fig5_cebra/                  # CEBRA manifold embeddings and results
 ```
 
-### From raw data (full pipeline)
+## Quick Start: Notebooks
+
+The easiest way to explore the results is through the Jupyter notebooks in `notebooks/`:
+
+| Notebook | Figure | Description |
+|----------|--------|-------------|
+| `fig2_encoding.ipynb` | Fig 2 | Encoding model: unique variance decomposition |
+| `fig3_reference_frames.ipynb` | Fig 3 | Reference frame preferences (allo/body/head) |
+| `fig4_motif_decoding.ipynb` | Fig 4 | Behavioral motif decoding + transition analysis |
+| `fig5_cebra_manifold.ipynb` | Fig 5 | CEBRA manifold: decoding, dynamics, context coding |
+
+Each notebook has two parts:
+- **Part A (Demo)**: Runs the analysis pipeline with minimal parameters (~1-5 min)
+- **Part B (Production)**: Loads pre-computed results and generates publication figures
+
+## Full Reproduction
+
+To re-run analyses from raw data:
 
 ```bash
 # Fig 2: Encoding model (M2 sessions, ~1h)
 python scripts/run_fig2b_all_sessions.py \
-    --sessions M2_0526 M2_0605 --bin-width 0.5 --save-residuals
+    --output-dir results/production --sessions M2_0526 M2_0605 \
+    --bin-s 0.5 --n-perm 100 --n-perm-null 500
 
 # Fig 3: Reference frames (all sessions, ~1h)
 python scripts/run_fig3_all_sessions.py
@@ -89,48 +87,37 @@ python scripts/run_fig4_all_sessions.py \
 
 # Fig 5: CEBRA manifold (all sessions, ~45min with GPU)
 python scripts/run_fig5_cebra.py \
-    --output-dir results/fig5_cebra
+    --output-dir results/fig5_cebra --max-iterations 5000
 ```
 
 ## Repository Structure
 
 ```
 solo_mSTS_parodi2026/
-  freemat/single_fm/       # Core analysis modules
-    data/                  # Session loading, feature computation, calibration
-    encoding/              # Ridge regression, variance decomposition, decoding
-    features/              # VIS/KIN/POS feature computation
-    analysis/              # Syllable analysis (follow-up)
-  freemat_data/            # Data infrastructure (loaders, types, sync)
-  analysis/                # Decoding framework, syllable alignment
-  scripts/                 # Runnable analysis pipelines (Figs 2-5)
-  configs/                 # Session configs, calibration JSONs, electrode banks
-  tests/                   # Unit tests
+  freemat/single_fm/           # Core analysis modules
+    data/                      #   Session loading, calibration, arena geometry
+    encoding/                  #   Ridge regression, variance decomposition, decoding
+    features/                  #   VIS, BODY_KIN, HEAD_KIN, POS features
+    viz/                       #   Publication figure panels
+  freemat_data/                # Data infrastructure (loaders, types, sync)
+  analysis/                    # Decoding framework, syllable alignment
+  scripts/                     # Runnable analysis pipelines
+  notebooks/                   # Per-figure Jupyter notebooks
+  configs/                     # Session configs, calibration JSONs, electrode banks
+  tests/                       # Unit + smoke tests (123 passing)
 ```
-
-## Key Analysis Modules
-
-| Module | Purpose |
-|--------|---------|
-| `encoding/run_fig2b.py` | Ridge encoding + unique variance decomposition |
-| `encoding/fig2d_spatial_decoder.py` | Height/zone spatial decoding |
-| `encoding/fig3_rf_index.py` | Reference-frame preference (allo/body/head) |
-| `encoding/run_fig4.py` | Behavioral syllable decoding + PETH |
-| `data/session_loader.py` | Aligned spike-pose data loading |
-| `data/feature_builder.py` | VIS, BODY_KIN, HEAD_KIN, POS features |
-| `data/arena.py` | Hexagonal arena geometry (d_wall_horiz) |
 
 ## Sessions
 
-| Session | Subject | Units | Duration | FPS |
-|---------|---------|-------|----------|-----|
-| M2_0526 | M2 | 443 | 40 min | 40 |
-| M2_0605 | M2 | 400 | 40 min | 40 |
-| M1_0525 | M1 | 186 | 31 min | 40 |
-| M1_0609 | M1 | 191 | 17 min | 30 |
-| M1_0613 | M1 | 184 | 37 min | 40 |
+| Session | Subject | Units (SUA + MUA) | Duration | FPS |
+|---------|---------|-------------------|----------|-----|
+| M2_0526 | M2 | 443 (321 + 122) | 40 min | 40 |
+| M2_0605 | M2 | 400 (277 + 123) | 40 min | 40 |
+| M1_0525 | M1 | 186 (86 + 100) | 31 min | 40 |
+| M1_0609 | M1 | 191 (90 + 101) | 17 min | 30 |
+| M1_0613 | M1 | 184 (86 + 98) | 37 min | 40 |
 
-**Total**: 1,404 units (860 SUA + 544 MUA) across 5 sessions.
+**Total**: 1,404 units (860 SUA + 544 MUA) across 5 sessions, 2 subjects.
 
 ## License
 
