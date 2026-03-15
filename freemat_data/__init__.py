@@ -1,13 +1,7 @@
 """Unified data-loading utilities for FreeMat projects.
 
-This package provides a small, typed API to load common modalities
-(3D pose, spikes) from a single session registry (configs/sessions.yaml).
-
-It is designed to be extracted into its own repository later and re-used by:
-- freemat (social-monkey analyses)
-- freemat/single (single-monkey analyses)
-- poyopo/torch_brain (3D pose decoding)
-- poyopo/freemat_vid_inference (optional context for pose NPZ schema)
+Provides typed loaders for 3D pose, spikes, motifs, and sync data
+used by the single-monkey mid-STS encoding pipeline.
 
 Environment variables:
 - FREEMAT_DATA_ROOT: optional base path override for data files
