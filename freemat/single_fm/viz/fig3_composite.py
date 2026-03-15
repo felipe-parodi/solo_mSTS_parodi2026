@@ -1,4 +1,4 @@
-"""Figure 3 composite: 2×3 panel assembly for Nature Communications.
+"""Figure 3 composite: 2×3 panel assembly .
 
 Assembles 6 panels (A-F) into a single publication-ready figure using
 nested subgridspecs. Panels A,B are placeholders (schematic + pie charts,

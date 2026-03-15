@@ -1,4 +1,4 @@
-"""Figure 2 composite: 7-panel assembly for Nature Communications.
+"""Figure 2 composite: 7-panel assembly .
 
 Assembles panels A-G into a single publication-ready figure using nested
 subgridspecs. Panel A is a placeholder (schematic added in Illustrator).
@@ -579,9 +579,9 @@ def fig2_composite(
     _draw_placeholder(ax_a, "Schematic\n(add in Illustrator)")
 
     # Panel B: Testard boxplots (M2 only)
-    hedy_sessions = ["M2_0526", "M2_0605"]
-    df_hedy = fig2_all_df[fig2_all_df["session_id"].isin(hedy_sessions)].copy()
-    ax_b_full, ax_b_unique = _draw_panel_b_boxplots(row0[0, 1], fig, df_hedy)
+    M2_sessions = ["M2_0526", "M2_0605"]
+    df_M2 = fig2_all_df[fig2_all_df["session_id"].isin(M2_sessions)].copy()
+    ax_b_full, ax_b_unique = _draw_panel_b_boxplots(row0[0, 1], fig, df_M2)
 
     # Panel C: Subpopulation scatter (all sessions — classify on full population
     # so FDR significance alone drives the n=871 count, matching production CSVs)
@@ -610,7 +610,7 @@ def fig2_composite(
 
     # Panel F: Variance decomposition (M2)
     ax_f = fig.add_subplot(row1[0, 2])
-    _draw_panel_f_variance(ax_f, df_hedy)
+    _draw_panel_f_variance(ax_f, df_M2)
     ax_f.yaxis.set_major_locator(MaxNLocator(nbins=3))
 
     # Panel G: Spatial modulation map

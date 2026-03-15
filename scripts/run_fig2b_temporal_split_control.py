@@ -875,7 +875,7 @@ def main() -> None:
             m = compute_paired_metrics(sess_merged, sess_key)
             summary_rows.append(m)
 
-    # Per-subject metrics (M2 = hedy_*, M1 = hooke_*)
+    # Per-subject metrics (M2 = M2_*, M1 = M1_*)
     SUBJECT_SESSIONS: Dict[str, List[str]] = {
         "M2": [k for k in sessions_to_run if k.startswith("M2")],
         "M1": [k for k in sessions_to_run if k.startswith("M1")],
