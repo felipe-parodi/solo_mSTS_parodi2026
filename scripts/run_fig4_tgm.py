@@ -37,11 +37,11 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 SESSIONS: Dict[str, str] = {
-    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
-    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
-    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
-    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M1_0525": "configs/session_M1_0525.yaml",
+    "M2_0526": "configs/session_M2_0526.yaml",
+    "M2_0605": "configs/session_M2_0605.yaml",
+    "M1_0609": "configs/session_M1_0609.yaml",
+    "M1_0613": "configs/session_M1_0613.yaml",
 }
 
 SESSION_OUTPUT_DIRS: Dict[str, str] = {
@@ -53,7 +53,7 @@ SESSION_OUTPUT_DIRS: Dict[str, str] = {
 }
 
 # Default tuning data location (from production Fig 4 runs)
-DEFAULT_TUNING_DIR = "results/single_fm/fig4_pilot"
+DEFAULT_TUNING_DIR = "results/fig4_pilot"
 
 
 def main() -> None:
@@ -66,7 +66,7 @@ def main() -> None:
         help="Session keys (e.g. M2_0526 M1_0525) or 'all'",
     )
     parser.add_argument(
-        "--output-dir", default="results/single_fm/fig4_tgm",
+        "--output-dir", default="results/fig4_tgm",
         help="Output directory for results",
     )
     parser.add_argument(

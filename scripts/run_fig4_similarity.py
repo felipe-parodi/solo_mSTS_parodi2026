@@ -7,9 +7,9 @@ summary statistics.
 
 Example:
     python scripts/single_fm/run_fig4_similarity.py \
-        --fig4-dir results/single_fm/fig4_production \
+        --fig4-dir results/fig4_production \
         --motifs-dir "C:/path/to/_motifs_output_40hz_optimal_260209_2141" \
-        --output-dir results/single_fm/fig4_similarity
+        --output-dir results/fig4_similarity
 """
 
 from __future__ import annotations

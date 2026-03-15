@@ -11,13 +11,13 @@ Example:
     ...     update_manifest_row,
     ... )
     >>> df = pd.DataFrame({"t": [0.0, 1.0], "fr": [5.0, 7.0]})
-    >>> save_aligned_parquet(df, "results/single_fm/aligned/session_001_bin1p0.parquet",
+    >>> save_aligned_parquet(df, "results/aligned/session_001_bin1p0.parquet",
     ...                      metadata={"session_id": "session_001", "bin_s": 1.0})
-    >>> save_qc_json({"n_units": 128}, "results/single_fm/session_001/qc_session_001.json")
-    >>> copy_session_yaml("configs/single_fm/session_001.yaml", "results/single_fm/session_001")
-    'results/single_fm/session_001/session.yaml'
-    >>> update_manifest_row("results/single_fm/_manifest.csv", "session_001",
-    ...                    {"aligned_1p0": "results/single_fm/aligned/session_001_bin1p0.parquet"})
+    >>> save_qc_json({"n_units": 128}, "results/session_001/qc_session_001.json")
+    >>> copy_session_yaml("configs/session_001.yaml", "results/session_001")
+    'results/session_001/session.yaml'
+    >>> update_manifest_row("results/_manifest.csv", "session_001",
+    ...                    {"aligned_1p0": "results/aligned/session_001_bin1p0.parquet"})
 
 Notes:
     - Metadata for parquet is written as a sidecar JSON (`<path>.meta.json`).

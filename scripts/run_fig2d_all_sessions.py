@@ -39,11 +39,11 @@ from freemat.single_fm.viz.fig2d_panels import save_fig2d_decoder_pairs  # noqa:
 
 
 SESSIONS: Dict[str, str] = {
-    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
-    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
-    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
-    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M1_0525": "configs/session_M1_0525.yaml",
+    "M2_0526": "configs/session_M2_0526.yaml",
+    "M2_0605": "configs/session_M2_0605.yaml",
+    "M1_0609": "configs/session_M1_0609.yaml",
+    "M1_0613": "configs/session_M1_0613.yaml",
 }
 
 SESSION_OUTPUT_DIRS: Dict[str, str] = {

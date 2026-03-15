@@ -10,7 +10,7 @@ or geometry: those come from `freemat_data`.
 Example:
     >>> from freemat.single_fm.kin.features import KinParams, build_kin_features
     >>> df, qc = build_kin_features(
-    ...     'configs/single_fm/session_001.yaml',
+    ...     'configs/session_001.yaml',
     ...     params=KinParams(bin_s=0.05, smooth_win_s=1.0)
     ... )
 
@@ -85,7 +85,7 @@ class KinParams:
 def _prefer_processed_pose(session) -> Optional[str]:
     """Return processed upright pose path if present for `session_id`.
 
-    Looks for `results/single_fm/<sid>/pose_processed.npz`.
+    Looks for `results/<sid>/pose_processed.npz`.
     """
     sid = getattr(session, "session_id", None)
     if not sid:

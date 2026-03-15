@@ -7,7 +7,7 @@ next motif is unlikely under a behavior-only transition model.
 Usage:
     conda activate mucal3
     python scripts/single_fm/run_fig5_transition_surprisal.py \\
-        --output-dir results/single_fm/fig5_transition_surprisal \\
+        --output-dir results/fig5_transition_surprisal \\
         --sessions M2_0526 \\
         --n-perm 10
 
@@ -55,11 +55,11 @@ from freemat_data import load_motifs_from_session  # noqa: E402
 # ── Session configs ──────────────────────────────────────────────────────
 
 SESSION_CONFIGS = {
-    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
-    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
-    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
-    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M2_0526": "configs/session_M2_0526.yaml",
+    "M2_0605": "configs/session_M2_0605.yaml",
+    "M1_0525": "configs/session_M1_0525.yaml",
+    "M1_0609": "configs/session_M1_0609.yaml",
+    "M1_0613": "configs/session_M1_0613.yaml",
 }
 
 # Continuous feature columns to aggregate in pre-window
@@ -416,7 +416,7 @@ def main() -> None:
     """Run transition surprisal analysis."""
     parser = argparse.ArgumentParser(description="Fig 5 transition surprisal analysis")
     parser.add_argument("--output-dir", type=str,
-                        default="results/single_fm/fig5_transition_surprisal")
+                        default="results/fig5_transition_surprisal")
     parser.add_argument("--sessions", nargs="+",
                         default=list(SESSION_CONFIGS.keys()))
     parser.add_argument("--n-perm", type=int, default=500)

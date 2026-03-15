@@ -21,7 +21,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 cd "$PROJECT_ROOT"
 
-PROD_DIR="results/single_fm/temporal_split_control"
+PROD_DIR="results/temporal_split_control"
 LOGFILE="$PROD_DIR/temporal_split_control.log"
 mkdir -p "$PROD_DIR"
 

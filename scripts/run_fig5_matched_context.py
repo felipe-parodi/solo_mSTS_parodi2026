@@ -11,7 +11,7 @@ Hardens context-dependent coding claim:
 Usage:
     conda activate mucal3
     python scripts/single_fm/run_fig5_matched_context.py \
-        --output-dir results/single_fm/fig5_matched_context \
+        --output-dir results/fig5_matched_context \
         --n-perm 500
 """
 from __future__ import annotations
@@ -40,11 +40,11 @@ from freemat.single_fm.viz.pub_data import load_fig5_embeddings  # noqa: E402
 # -- Session configs ------------------------------------------------------
 
 SESSION_CONFIGS: Dict[str, str] = {
-    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
-    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
-    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
-    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M2_0526": "configs/session_M2_0526.yaml",
+    "M2_0605": "configs/session_M2_0605.yaml",
+    "M1_0525": "configs/session_M1_0525.yaml",
+    "M1_0609": "configs/session_M1_0609.yaml",
+    "M1_0613": "configs/session_M1_0613.yaml",
 }
 
 ALL_SESSIONS: List[str] = list(SESSION_CONFIGS.keys())
@@ -335,7 +335,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--output-dir", type=str,
-        default="results/single_fm/fig5_matched_context",
+        default="results/fig5_matched_context",
     )
     parser.add_argument("--n-perm", type=int, default=500)
     parser.add_argument("--caliper", type=float, default=1.0)

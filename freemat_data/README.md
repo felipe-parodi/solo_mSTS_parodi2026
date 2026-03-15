@@ -64,7 +64,7 @@ Calibration examples
 ```python
 from freemat_data import load_session_yaml, load_calibration_from_session
 from freemat_data.calibration import apply_center_translation_to_calib
-sess = load_session_yaml('configs/single_fm/session_example.yaml')
+sess = load_session_yaml('configs/session_example.yaml')
 calib = load_calibration_from_session(sess)
 center_shift = com_xyz.mean(axis=0)  # e.g., CoM mean over a stable segment
 calib_centered = apply_center_translation_to_calib(calib, center_shift)
@@ -108,7 +108,7 @@ Notes on centralization
 - Future work: migrate motif and torch_brain loaders to call `freemat_data` and add unit tests for `load_pose3d` and transforms.
 
 Quick start (per‑session YAML)
-- Create `configs/single_fm/session_<id>.yaml` with `pose_3d`, `m1_neural` (or `m2_*_neural`), `syncmap_json`, and optional `calib_pkl`.
+- Create `configs/session_<id>.yaml` with `pose_3d`, `m1_neural` (or `m2_*_neural`), `syncmap_json`, and optional `calib_pkl`.
 - Minimal usage:
 
 ```python
@@ -120,7 +120,7 @@ from freemat_data import (
     load_hex_uv, checker_mesh_from_hex
 )
 
-sess = load_session_yaml('configs/single_fm/session_example.yaml')
+sess = load_session_yaml('configs/session_example.yaml')
 pose = load_pose3d_from_session(sess)
 spk = load_spikes_from_session(sess)
 sync = get_syncmap_from_session(sess)
@@ -139,7 +139,7 @@ Sync usage
 ```python
 from freemat_data import load_session_yaml, get_syncmap_from_session, map_spikes_to_video
 
-sess = load_session_yaml('configs/single_fm/session_example.yaml')
+sess = load_session_yaml('configs/session_example.yaml')
 sync = get_syncmap_from_session(sess)
 if sync is not None:
     t_spk_video = map_spikes_to_video(spikes, sync, logger='m1')

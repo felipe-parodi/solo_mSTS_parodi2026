@@ -9,8 +9,8 @@ Example:
     >>> from freemat.single_fm.encoding.run_fig4 import Fig4Config, run_fig4_session
     >>> cfg = Fig4Config(bin_s=0.5, top_n_motifs=10)
     >>> run_fig4_session(
-    ...     session_yaml="configs/single_fm/session_M2_0526.yaml",
-    ...     output_dir="results/single_fm/fig4_pilot/single_0526_M2",
+    ...     session_yaml="configs/session_M2_0526.yaml",
+    ...     output_dir="results/fig4_pilot/single_0526_M2",
     ...     config=cfg,
     ... )
 """

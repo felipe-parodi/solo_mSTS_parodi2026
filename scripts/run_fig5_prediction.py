@@ -10,7 +10,7 @@ Usage:
     conda activate mucal3
     python scripts/single_fm/run_fig5_prediction.py \
         --sessions M2_0526 \
-        --output-dir results/single_fm/fig5_prediction \
+        --output-dir results/fig5_prediction \
         --n-perm 10
 
     # Production (all 5 sessions, 500 perms):
@@ -52,11 +52,11 @@ from freemat_data import load_motifs_from_session  # noqa: E402
 # ── Session configs ──────────────────────────────────────────────────────
 
 SESSION_CONFIGS = {
-    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
-    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
-    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
-    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M2_0526": "configs/session_M2_0526.yaml",
+    "M2_0605": "configs/session_M2_0605.yaml",
+    "M1_0525": "configs/session_M1_0525.yaml",
+    "M1_0609": "configs/session_M1_0609.yaml",
+    "M1_0613": "configs/session_M1_0613.yaml",
 }
 
 ALL_SESSIONS = list(SESSION_CONFIGS.keys())
@@ -427,7 +427,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--output-dir", type=str,
-        default="results/single_fm/fig5_prediction",
+        default="results/fig5_prediction",
     )
     parser.add_argument(
         "--n-perm", type=int, default=500,

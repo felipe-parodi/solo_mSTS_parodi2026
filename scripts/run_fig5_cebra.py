@@ -12,7 +12,7 @@ Runs the full analysis pipeline:
 Usage:
     conda activate mucal3
     python scripts/single_fm/run_fig5_cebra.py \
-        --output-dir results/single_fm/fig5_cebra \
+        --output-dir results/fig5_cebra \
         --max-iterations 10000 \
         --n-perms 100
 
@@ -52,11 +52,11 @@ from freemat_data import load_motifs_from_session  # noqa: E402
 # ── Configuration ─────────────────────────────────────────────────────────
 
 SESSION_CONFIGS = {
-    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
-    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
-    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
-    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M2_0526": "configs/session_M2_0526.yaml",
+    "M2_0605": "configs/session_M2_0605.yaml",
+    "M1_0525": "configs/session_M1_0525.yaml",
+    "M1_0609": "configs/session_M1_0609.yaml",
+    "M1_0613": "configs/session_M1_0613.yaml",
 }
 
 # Two CEBRA model families (FLAW 1 fix: no com_z leakage for height claims)
@@ -1594,7 +1594,7 @@ def run_full_pipeline(args):
 def parse_args():
     parser = argparse.ArgumentParser(description="Figure 5 CEBRA analysis")
     parser.add_argument("--output-dir", type=str,
-                        default="results/single_fm/fig5_cebra")
+                        default="results/fig5_cebra")
     parser.add_argument("--sessions", nargs="*", default=None,
                         help="Sessions to run (default: all 5)")
     parser.add_argument("--max-iterations", type=int, default=10000)

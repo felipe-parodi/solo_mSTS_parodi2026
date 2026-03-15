@@ -15,17 +15,17 @@ Configurations:
 Usage:
     # Run all 6 configs
     python scripts/single_fm/run_fig2b_sensitivity.py \
-        --output-dir results/single_fm \
+        --output-dir results \
         --n-perm 100 --n-perm-null 50
 
     # Run subset of configs, skip existing results
     python scripts/single_fm/run_fig2b_sensitivity.py \
-        --output-dir results/single_fm \
+        --output-dir results \
         --configs primary gam \
         --skip-existing
 
 Output Structure:
-    results/single_fm_sensitivity/
+    results_sensitivity/
     +-- primary/
     |   +-- single_0525_M1/encoding/fig2b_unique_variance.parquet
     |   +-- .../
@@ -58,11 +58,11 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 # Session configuration (mirrored from run_fig2b_all_sessions.py)
 SESSIONS: Dict[str, str] = {
-    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
-    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
-    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
-    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M1_0525": "configs/session_M1_0525.yaml",
+    "M2_0526": "configs/session_M2_0526.yaml",
+    "M2_0605": "configs/session_M2_0605.yaml",
+    "M1_0609": "configs/session_M1_0609.yaml",
+    "M1_0613": "configs/session_M1_0613.yaml",
 }
 
 SESSION_OUTPUT_DIRS: Dict[str, str] = {
@@ -135,7 +135,7 @@ def parse_args() -> argparse.Namespace:
         "--output-dir",
         type=str,
         required=True,
-        help="Base output directory (e.g., results/single_fm). "
+        help="Base output directory (e.g., results). "
         "Sensitivity results go into {output_dir}_sensitivity/",
     )
     parser.add_argument(

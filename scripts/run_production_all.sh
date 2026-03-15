@@ -34,7 +34,7 @@ cd "$PROJECT_ROOT"
 
 # Timestamped output directory
 TIMESTAMP=$(date +%Y%m%d_%H%M)
-PROD_DIR="results/single_fm/production_${TIMESTAMP}"
+PROD_DIR="results/production_${TIMESTAMP}"
 mkdir -p "$PROD_DIR"
 
 # ── Sessions to run ──────────────────────────────────────────────────────
@@ -45,7 +45,7 @@ SESSIONS="M1_0525 M2_0526 M2_0605 M1_0609 M1_0613"
 CTRL_SESSIONS="M1_0525 M2_0526 M2_0605 M1_0609 M1_0613"
 
 # Cross-session arena alignment (Procrustes to M2_0526 reference)
-CANONICAL_ALIGN="--canonical-alignment configs/single_fm/canonical_alignment.json"
+CANONICAL_ALIGN="--canonical-alignment configs/canonical_alignment.json"
 
 # Common flags for Fig 2
 FIG2_COMMON="--n-jobs 6 --lag-s 1.0 --use-gpu --time-drift --no-floor-filter --save-residuals"
@@ -206,7 +206,7 @@ echo "    └── *.log                  # Per-step logs"
 echo ""
 echo "  Next steps:"
 echo "    1. Check logs for any failures"
-echo "    2. Visual review of results/single_fm/publication_figures/"
+echo "    2. Visual review of results/publication_figures/"
 echo "    3. Re-run pub figs if needed:"
 echo "       python scripts/single_fm/generate_publication_figures.py \\"
 echo "         --prod-dir $PROD_DIR --fig4-dir $PROD_DIR/fig4_all4"

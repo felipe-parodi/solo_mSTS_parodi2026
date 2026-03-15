@@ -6,22 +6,22 @@ for mid-STS neural activity.
 
 Usage:
     python scripts/single_fm/run_fig2b.py \
-        --session-yaml configs/single_fm/session_M1_0525.yaml \
-        --output-dir results/single_fm/240525 \
+        --session-yaml configs/session_M1_0525.yaml \
+        --output-dir results/240525 \
         --n-perm 1000
 
     # Quick test with fewer permutations
     python scripts/single_fm/run_fig2b.py \
-        --session-yaml configs/single_fm/session_M1_0525.yaml \
-        --output-dir results/single_fm/240525 \
+        --session-yaml configs/session_M1_0525.yaml \
+        --output-dir results/240525 \
         --n-perm 100 \
         --debug
 
     # Process multiple sessions
     python scripts/single_fm/run_fig2b.py \
-        --session-yaml configs/single_fm/session_M1_0525.yaml \
-        --session-yaml configs/single_fm/session_M1_0609.yaml \
-        --output-dir results/single_fm/summary \
+        --session-yaml configs/session_M1_0525.yaml \
+        --session-yaml configs/session_M1_0609.yaml \
+        --output-dir results/summary \
         --aggregate
 """
 
