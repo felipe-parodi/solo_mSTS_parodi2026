@@ -44,7 +44,7 @@ from freemat_data import (
 from freemat.single_fm.pose import find_nonempty_frame_index
 
 # Reuse the tested computation utilities
-from freemat.single_fm.viz.kin_features import (
+from freemat.single_fm.features.kin_features import (
     compute_kin_features,
     KinParams as _ComputeParams,
     make_lagged as _make_lagged,
@@ -219,7 +219,7 @@ def build_kin_features(
         plane_dict = {"a": 0.0, "b": 0.0, "c": 1.0, "d": 0.0}
 
     # Canonicalize joint names to improve head-forward detection
-    from freemat.single_fm.viz.kin_features import _canonicalize_joint_names as _canon
+    from freemat.single_fm.features.kin_features import _canonicalize_joint_names as _canon
     names = _canon(pose.joint_names or [])
 
     # Validity and forward vector checks for windowing
@@ -229,7 +229,7 @@ def build_kin_features(
     except Exception:
         valid_frac = np.isfinite(X).all(axis=2).mean(axis=1).astype(float)
     try:
-        from freemat.single_fm.viz.kin_features import _compute_head_forward_robust as _fwd_robust
+        from freemat.single_fm.features.kin_features import _compute_head_forward_robust as _fwd_robust
         n_hat = np.array([
             float(plane_dict.get('a', 0.0)),
             float(plane_dict.get('b', 0.0)),
@@ -362,7 +362,7 @@ def build_kin_features(
 
     # Gaze direction components (head-forward unit vector)
     if params.include_gaze:
-        from freemat.single_fm.viz.kin_features import _compute_head_forward_robust as _fwd_robust
+        from freemat.single_fm.features.kin_features import _compute_head_forward_robust as _fwd_robust
         n_hat = np.array([
             float(plane_dict.get('a', 0.0)),
             float(plane_dict.get('b', 0.0)),

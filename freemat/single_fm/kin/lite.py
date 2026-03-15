@@ -41,7 +41,7 @@ from freemat_data import load_pose3d, orient_pose_with_floor
 from freemat_data.util import pose_time_seconds
 from freemat_data import video_time_to_pose_axis
 from freemat_data.calibration import rotation_from_floor_json
-from freemat.single_fm.viz.kin_features import (
+from freemat.single_fm.features.kin_features import (
     _compute_head_forward_robust as _fwd_robust,
     _canonicalize_joint_names as _canon_names,
 )

@@ -723,23 +723,21 @@ def run_fig2b_encoding(
         if config.debug:
             print(f"[Fig2B] Saved: {out_path}")
 
-        # Generate figures
-        figures_dir = os.path.join(output_dir, "figures")
-        os.makedirs(figures_dir, exist_ok=True)
-
-        from freemat.single_fm.viz.fig2b import (
-            generate_fig2b_panel_3way,
-            plot_fig2b_by_bank,
-        )
-
-        generate_fig2b_panel_3way(results_df, figures_dir)
-
-        # Generate per-bank comparison if bank info available
-        if "unit_bank" in results_df.columns:
-            plot_fig2b_by_bank(results_df, figures_dir)
-
-        if config.debug:
-            print(f"[Fig2B] Saved figures to: {figures_dir}")
+        # Generate figures (if viz modules available)
+        try:
+            from freemat.single_fm.viz.fig2b import (
+                generate_fig2b_panel_3way,
+                plot_fig2b_by_bank,
+            )
+            figures_dir = os.path.join(output_dir, "figures")
+            os.makedirs(figures_dir, exist_ok=True)
+            generate_fig2b_panel_3way(results_df, figures_dir)
+            if "unit_bank" in results_df.columns:
+                plot_fig2b_by_bank(results_df, figures_dir)
+            if config.debug:
+                print(f"[Fig2B] Saved figures to: {figures_dir}")
+        except ImportError:
+            pass  # viz modules not available (paper repo)
 
     return results_df
 
