@@ -576,7 +576,7 @@ def fig2_composite(
 
     # Panel A: Placeholder
     ax_a = fig.add_subplot(row0[0, 0])
-    _draw_placeholder(ax_a, "Schematic\n(add in Illustrator)")
+    _draw_placeholder(ax_a, "Encoding model\nschematic")
 
     # Panel B: Testard boxplots (M2 only)
     M2_sessions = ["M2_0526", "M2_0605"]
