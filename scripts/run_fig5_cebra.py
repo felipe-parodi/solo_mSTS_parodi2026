@@ -30,7 +30,14 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Dict, Optional, Tuple
 
-import matplotlib
+# Silence warnings before importing CEBRA (triggers requests/sklearn warnings)
+warnings.filterwarnings("ignore", message=".*urllib3.*charset_normalizer.*")
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+warnings.filterwarnings("ignore", message=".*lbfgs failed to converge.*")
+warnings.filterwarnings("ignore", message=".*y_pred contains classes not in y_true.*")
+
+import matplotlib  # noqa: E402
 matplotlib.use("Agg")
 import cebra  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
@@ -49,9 +56,6 @@ from freemat.single_fm.data.session_loader import SingleFMSessionLoader  # noqa:
 from freemat.single_fm.encoding.stats import circular_shift_indices  # noqa: E402, F401
 from freemat_data import load_motifs_from_session  # noqa: E402
 
-warnings.filterwarnings("ignore", category=FutureWarning)
-warnings.filterwarnings("ignore", message=".*lbfgs failed to converge.*")
-warnings.filterwarnings("ignore", message=".*y_pred contains classes not in y_true.*")
 
 # ── Configuration ─────────────────────────────────────────────────────────
 
@@ -978,7 +982,7 @@ def plot_embedding_3d(
         plt.colorbar(sc, ax=ax, label=colorbar_label, shrink=0.6)
     else:
         unique_labels = np.unique(labels)
-        colors = plt.cm.get_cmap("tab20", len(unique_labels))
+        colors = plt.colormaps.get_cmap("tab20").resampled(len(unique_labels))
         for i, lab in enumerate(unique_labels):
             mask = labels == lab
             name = label_names.get(int(lab), str(lab)) if label_names else str(lab)
