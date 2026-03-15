@@ -216,7 +216,7 @@ def infer_logger(session: SessionRef) -> str:
 
 
 def infer_subject(session: SessionRef) -> Optional[str]:
-    """Infer subject name ('hedy' or 'hooke') from session metadata or paths.
+    """Infer subject name ('M2' or 'M1') from session metadata or paths.
 
     Precedence:
       1) Explicit metadata 'subject'
@@ -226,14 +226,14 @@ def infer_subject(session: SessionRef) -> Optional[str]:
     subj = (session.metadata or {}).get('subject')
     if isinstance(subj, str) and subj.strip():
         s = subj.strip().lower()
-        if s in {"hedy", "hooke"}:
+        if s in {"M2", "M1"}:
             return s
     hay = " ".join([str(session.session_id), *(str(v) for v in (session.data_files or {}).values() if v)])
     low = hay.lower()
-    if "hedy" in low:
-        return "hedy"
-    if "hooke" in low:
-        return "hooke"
+    if "M2" in low:
+        return "M2"
+    if "M1" in low:
+        return "M1"
     return None
 
 

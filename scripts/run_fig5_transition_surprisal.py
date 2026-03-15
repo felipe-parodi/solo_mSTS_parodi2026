@@ -8,7 +8,7 @@ Usage:
     conda activate mucal3
     python scripts/single_fm/run_fig5_transition_surprisal.py \\
         --output-dir results/single_fm/fig5_transition_surprisal \\
-        --sessions hedy_0526 \\
+        --sessions M2_0526 \\
         --n-perm 10
 
 Author: Felipe Parodi + Claude
@@ -55,11 +55,11 @@ from freemat_data import load_motifs_from_session  # noqa: E402
 # ── Session configs ──────────────────────────────────────────────────────
 
 SESSION_CONFIGS = {
-    "hedy_0526": "configs/single_fm/session_hedy_0526.yaml",
-    "hedy_0605": "configs/single_fm/session_M2_0605.yaml",
-    "hooke_0525": "configs/single_fm/session_M1_0525.yaml",
-    "hooke_0609": "configs/single_fm/session_M1_0609.yaml",
-    "hooke_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
+    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
+    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
+    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
+    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
 }
 
 # Continuous feature columns to aggregate in pre-window

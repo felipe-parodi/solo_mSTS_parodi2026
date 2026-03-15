@@ -6,7 +6,7 @@ aggregates results, and saves per-session + summary outputs.
 
 Sessions (5 with ethograms):
 - M1_0525: configs/single_fm/session_M1_0525.yaml (hooke)
-- hedy_0526: configs/single_fm/session_hedy_0526.yaml
+- M2_0526: configs/single_fm/session_M2_0526.yaml
 - M2_0605: configs/single_fm/session_M2_0605.yaml (hedy)
 - M1_0609: configs/single_fm/session_M1_0609.yaml (hooke)
 - M1_0613: configs/single_fm/session_M1_0613.yaml (hooke)
@@ -15,12 +15,12 @@ Usage:
     # Quick pilot on one session (10 perms)
     python scripts/single_fm/run_fig4_all_sessions.py \
         --output-dir results/single_fm/fig4_pilot \
-        --sessions hedy_0526 --n-perm 10 --debug
+        --sessions M2_0526 --n-perm 10 --debug
 
-    # Hedy-only production run
+    # M2-only production run
     python scripts/single_fm/run_fig4_all_sessions.py \
         --output-dir results/single_fm/fig4_hedy \
-        --sessions hedy_0526 M2_0605 --n-perm 1000
+        --sessions M2_0526 M2_0605 --n-perm 1000
 
     # All 4 sessions production run
     python scripts/single_fm/run_fig4_all_sessions.py \
@@ -46,7 +46,7 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 SESSIONS: Dict[str, str] = {
     "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "hedy_0526": "configs/single_fm/session_hedy_0526.yaml",
+    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
     "M2_0605": "configs/single_fm/session_M2_0605.yaml",
     "M1_0609": "configs/single_fm/session_M1_0609.yaml",
     "M1_0613": "configs/single_fm/session_M1_0613.yaml",
@@ -54,7 +54,7 @@ SESSIONS: Dict[str, str] = {
 
 SESSION_OUTPUT_DIRS: Dict[str, str] = {
     "M1_0525": "single_0525_M1",
-    "hedy_0526": "single_0526_hedy",
+    "M2_0526": "single_0526_M2",
     "M2_0605": "single_0605_M2",
     "M1_0609": "single_0609_M1",
     "M1_0613": "single_0613_M1",

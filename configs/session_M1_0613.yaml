@@ -1,17 +1,17 @@
-# Session config for Hooke 240613 (asocial)
+# Session config for M1 240613 (asocial)
 # Paths are relative to DATA_ROOT (env var) or repo_root/data/
-session_id: hooke_0613
+session_id: M1_0613
 
 data_files:
-  pose3d_npz: 240613-hooke/pose3d_smoothed.npz
-  hooke_neural: 240613-hooke/Neural_data_sorted_final.mat
-  syncmap_json: 240613-hooke/sync_map.json
+  pose3d_npz: 240613-M1/pose3d_smoothed.npz
+  M1_neural: 240613-M1/Neural_data_sorted_final.mat
+  syncmap_json: 240613-M1/sync_map.json
   motifs_dir: motifs
-  antenna_json: configs/antenna_hooke_0613.json
+  antenna_json: configs/antenna_M1_0613.json
 
 metadata:
-  animal: hooke
+  animal: M1
   date: "2024-06-13"
   session_type: asocial
   fps: 40.0
-  ethogram_session_id: "240613-hooke"
+  ethogram_session_id: "240613-M1"

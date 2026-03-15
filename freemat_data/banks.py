@@ -21,7 +21,7 @@ def load_banks_config(path: str = "configs/banks.yaml") -> Dict[str, list]:
 
     Returns:
         Dict with keys: 'ventral_channels', 'dorsal_channels', and optional
-        'hooke_exclude', 'hedy_exclude'.
+        'M1_exclude', 'M2_exclude'.
 
     Raises:
         FileNotFoundError: If the YAML does not exist.
@@ -68,7 +68,7 @@ def excluded_channels_for_subject(subject: Optional[str], banks_cfg: Dict[str, l
     """Return the set of channels to exclude for a given subject name.
 
     Args:
-        subject: e.g., 'hedy' or 'hooke'. Case-insensitive; None → empty set.
+        subject: e.g., 'M2' or 'M1'. Case-insensitive; None → empty set.
         banks_cfg: Loaded YAML dict.
 
     Returns:

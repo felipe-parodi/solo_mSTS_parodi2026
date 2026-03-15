@@ -9,7 +9,7 @@ If residualized accuracy >> chance, the motif signal is not reducible to continu
 
 Usage:
     python scripts/single_fm/run_fig4_residualized_decoding.py
-    python scripts/single_fm/run_fig4_residualized_decoding.py --sessions hedy_0526 --n-perm 10
+    python scripts/single_fm/run_fig4_residualized_decoding.py --sessions M2_0526 --n-perm 10
 """
 from __future__ import annotations
 
@@ -39,19 +39,19 @@ from freemat_data import load_motifs_from_session  # noqa: E402
 
 # ── Session configuration ────────────────────────────────────────────────
 SESSION_CONFIGS = {
-    "hedy_0526": "configs/single_fm/session_hedy_0526.yaml",
-    "hedy_0605": "configs/single_fm/session_M2_0605.yaml",
-    "hooke_0525": "configs/single_fm/session_M1_0525.yaml",
-    "hooke_0609": "configs/single_fm/session_M1_0609.yaml",
-    "hooke_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
+    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
+    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
+    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
+    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
 }
 
 SESSION_DIRS = {
-    "hedy_0526": "single_0526_hedy",
-    "hedy_0605": "single_0605_M2",
-    "hooke_0525": "single_0525_M1",
-    "hooke_0609": "single_0609_M1",
-    "hooke_0613": "single_0613_M1",
+    "M2_0526": "single_0526_M2",
+    "M2_0605": "single_0605_M2",
+    "M1_0525": "single_0525_M1",
+    "M1_0609": "single_0609_M1",
+    "M1_0613": "single_0613_M1",
 }
 
 DEFAULT_RESIDUALS_DIR = (

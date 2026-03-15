@@ -23,8 +23,8 @@ class TestArenaFromJSON:
 
     CALIB_DIR = REPO_ROOT / "configs"
     SESSIONS = [
-        "hedy_0526", "hedy_0605",
-        "hooke_0525", "hooke_0609", "hooke_0613",
+        "M2_0526", "M2_0605",
+        "M1_0525", "M1_0609", "M1_0613",
     ]
 
     @pytest.fixture(params=SESSIONS)
@@ -79,8 +79,8 @@ class TestCalibrationJSON:
 
     CALIB_DIR = REPO_ROOT / "configs"
     SESSIONS = [
-        "hedy_0526", "hedy_0605",
-        "hooke_0525", "hooke_0609", "hooke_0613",
+        "M2_0526", "M2_0605",
+        "M1_0525", "M1_0609", "M1_0613",
     ]
 
     @pytest.fixture(params=SESSIONS)
@@ -176,7 +176,7 @@ class TestSessionYAMLs:
     CONFIG_DIR = REPO_ROOT / "configs"
 
     @pytest.fixture(params=[
-        "session_hedy_0526.yaml",
+        "session_M2_0526.yaml",
         "session_M2_0605.yaml",
         "session_M1_0525.yaml",
         "session_M1_0609.yaml",
@@ -223,8 +223,8 @@ class TestCrossSessionConsistency:
 
     CALIB_DIR = REPO_ROOT / "configs"
     SESSIONS = [
-        "hedy_0526", "hedy_0605",
-        "hooke_0525", "hooke_0609", "hooke_0613",
+        "M2_0526", "M2_0605",
+        "M1_0525", "M1_0609", "M1_0613",
     ]
 
     def test_all_sessions_same_up_axis(self):

@@ -31,7 +31,7 @@ from freemat.single_fm.data.session_loader import SingleFMSessionLoader  # noqa:
 
 
 SESSION_YAMLS = [
-    "configs/single_fm/session_hedy_0526.yaml",
+    "configs/single_fm/session_M2_0526.yaml",
     "configs/single_fm/session_M2_0605.yaml",
     "configs/single_fm/session_M1_0525.yaml",
     "configs/single_fm/session_M1_0609.yaml",

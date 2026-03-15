@@ -26,8 +26,8 @@ def _make_synthetic_fig3(n: int = 200) -> pd.DataFrame:
     rng = np.random.default_rng(42)
     frames = ["allo", "body", "head"]
     return pd.DataFrame({
-        "session_id": rng.choice(["hedy_0526", "hooke_0525"], n),
-        "subject": rng.choice(["Hedy", "Hooke"], n),
+        "session_id": rng.choice(["M2_0526", "M1_0525"], n),
+        "subject": rng.choice(["M2", "M1"], n),
         "unit_id": np.arange(n),
         "winner_frame": rng.choice(frames, n),
         "delta_r2_allo": rng.normal(0.01, 0.005, n),

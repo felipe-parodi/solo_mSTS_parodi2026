@@ -3,7 +3,7 @@
 # Production batch runner: Figs 2, 3, 4 + controls + publication figures
 #
 # Re-runs the full analysis pipeline with raw 3D pose data (no constraints)
-# and cross-session canonical arena alignment (Procrustes to hedy_0526).
+# and cross-session canonical arena alignment (Procrustes to M2_0526).
 # Each Fig 2 session runs as its own step for OOM isolation — if one session
 # crashes, the rest still complete. A final aggregation step combines results.
 # Fig 3 runs all sessions in one call (lighter memory footprint).
@@ -39,12 +39,12 @@ mkdir -p "$PROD_DIR"
 
 # ── Sessions to run ──────────────────────────────────────────────────────
 # All 5 sessions. M1_0609 pose data corrected (30hz bbox interp fix, 2026-02-14).
-SESSIONS="M1_0525 hedy_0526 M2_0605 M1_0609 M1_0613"
+SESSIONS="M1_0525 M2_0526 M2_0605 M1_0609 M1_0613"
 
 # Control scripts use a different naming convention
-CTRL_SESSIONS="hooke_0525 hedy_0526 hedy_0605 hooke_0609 hooke_0613"
+CTRL_SESSIONS="M1_0525 M2_0526 M2_0605 M1_0609 M1_0613"
 
-# Cross-session arena alignment (Procrustes to hedy_0526 reference)
+# Cross-session arena alignment (Procrustes to M2_0526 reference)
 CANONICAL_ALIGN="--canonical-alignment configs/single_fm/canonical_alignment.json"
 
 # Common flags for Fig 2
@@ -198,7 +198,7 @@ echo "  Logs:    $PROD_DIR/*.log"
 echo ""
 echo "  Output structure:"
 echo "    $PROD_DIR/"
-echo "    ├── all4_bin05/            # Fig 2 (Hedy filtered in fig gen)"
+echo "    ├── all4_bin05/            # Fig 2 (M2 filtered in fig gen)"
 echo "    ├── fig3_bin05/            # Fig 3 (filter by subject in figs)"
 echo "    ├── fig4_all4/             # Fig 4 (motif decoding)"
 echo "    ├── rssi_control/          # RSSI + antenna distance control"

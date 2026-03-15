@@ -6,7 +6,7 @@ and avoids silent fallbacks that can misalign cameras and trajectories.
 
 Typical usage:
     >>> from freemat.single_fm.pipeline.scene import resolve_session_and_assets, build_3d_scene
-    >>> sess, assets = resolve_session_and_assets(session_id='single_0526_hedy')
+    >>> sess, assets = resolve_session_and_assets(session_id='single_0526_M2')
     >>> bundle = build_3d_scene(sess, assets)
     >>> # bundle.com_xyz, bundle.calib_upr_centered, bundle.plane_upright
 

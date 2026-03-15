@@ -11,8 +11,8 @@
 #     - 0.25s bins same sessions
 #
 #   Phase 2: Fig 2B Production (2 GPUs parallel, ~4-8 hours)
-#     GPU0: Hedy sessions (hedy_0526, M2_0605) 0.5s then 0.25s
-#     GPU1: All 4 sessions (M1_0525, hedy_0526, M2_0605, M1_0609) 0.5s then 0.25s
+#     GPU0: M2 sessions (M2_0526, M2_0605) 0.5s then 0.25s
+#     GPU1: All 4 sessions (M1_0525, M2_0526, M2_0605, M1_0609) 0.5s then 0.25s
 #     100 shuffle perms, 10-fold CV, save residuals
 #
 # Usage:
@@ -35,8 +35,8 @@ FIG3_RUNNER="python scripts/single_fm/run_fig3_all_sessions.py"
 FIG2B_RUNNER="python scripts/single_fm/run_fig2b_all_sessions.py"
 
 FIG2B_COMMON="--n-perm 100 --n-perm-null 0 --use-gpu --n-jobs 14 --save-residuals --cv-folds 10"
-ALL_SESSIONS="M1_0525 hedy_0526 M2_0605 M1_0609"
-HEDY_SESSIONS="hedy_0526 M2_0605"
+ALL_SESSIONS="M1_0525 M2_0526 M2_0605 M1_0609"
+HEDY_SESSIONS="M2_0526 M2_0605"
 
 echo "============================================================"
 echo "Overnight Batch: Fig 3 + Fig 2B Production"
@@ -48,23 +48,23 @@ echo "============================================================"
 # ======================= SMOKE TEST =======================
 if [[ "${1:-}" == "--smoke" ]]; then
     echo ""
-    echo "[SMOKE] Quick test: Fig 3 + Fig 2B on hedy_0526 only"
+    echo "[SMOKE] Quick test: Fig 3 + Fig 2B on M2_0526 only"
     echo ""
     SMOKE_OUTPUT="results/single_fm/smoke_overnight_${TIMESTAMP}"
 
     # Fig 3 smoke
-    echo "[SMOKE] Fig 3: hedy_0526, 0.5s bins..."
+    echo "[SMOKE] Fig 3: M2_0526, 0.5s bins..."
     ${FIG3_RUNNER} \
         --output-dir "${SMOKE_OUTPUT}/fig3" \
-        --sessions hedy_0526 \
+        --sessions M2_0526 \
         --bin-s 0.5 --cv-folds 5 --n-jobs 14 \
         2>&1 | tee "${LOG_DIR}/smoke_fig3.log"
 
     # Fig 2B smoke
-    echo "[SMOKE] Fig 2B: hedy_0526, 0.5s bins, 10 perms..."
+    echo "[SMOKE] Fig 2B: M2_0526, 0.5s bins, 10 perms..."
     CUDA_VISIBLE_DEVICES=0 ${FIG2B_RUNNER} \
         --output-dir "${SMOKE_OUTPUT}/fig2b" \
-        --sessions hedy_0526 \
+        --sessions M2_0526 \
         --bin-s 0.5 \
         --n-perm 10 --n-perm-null 0 \
         --use-gpu --n-jobs 14 --save-residuals \
@@ -106,19 +106,19 @@ run_fig3() {
 
 # ======================= PHASE 2: FIG 2B =======================
 run_fig2b_gpu0() {
-    echo "[GPU0] Starting Hedy sessions..."
+    echo "[GPU0] Starting M2 sessions..."
 
     # 0.5s bins
-    echo "[GPU0] Hedy 0.5s bins"
+    echo "[GPU0] M2 0.5s bins"
     CUDA_VISIBLE_DEVICES=0 ${FIG2B_RUNNER} \
-        --output-dir "${BASE_OUTPUT}/hedy_bin05" \
+        --output-dir "${BASE_OUTPUT}/M2_bin05" \
         --sessions ${HEDY_SESSIONS} \
         --bin-s 0.5 \
         ${FIG2B_COMMON} \
-        2>&1 | tee "${LOG_DIR}/gpu0_hedy_bin05.log"
+        2>&1 | tee "${LOG_DIR}/gpu0_M2_bin05.log"
 
     # 0.25s bins
-    echo "[GPU0] Hedy 0.25s bins"
+    echo "[GPU0] M2 0.25s bins"
     CUDA_VISIBLE_DEVICES=0 ${FIG2B_RUNNER} \
         --output-dir "${BASE_OUTPUT}/hedy_bin025" \
         --sessions ${HEDY_SESSIONS} \
@@ -126,7 +126,7 @@ run_fig2b_gpu0() {
         ${FIG2B_COMMON} \
         2>&1 | tee "${LOG_DIR}/gpu0_hedy_bin025.log"
 
-    echo "[GPU0] Hedy complete."
+    echo "[GPU0] M2 complete."
 }
 
 run_fig2b_gpu1() {
@@ -169,7 +169,7 @@ run_fig2b() {
     echo "GPU1 PID: ${GPU1_PID}"
     echo ""
     echo "Monitor:"
-    echo "  tail -f ${LOG_DIR}/gpu0_hedy_bin05.log"
+    echo "  tail -f ${LOG_DIR}/gpu0_M2_bin05.log"
     echo "  tail -f ${LOG_DIR}/gpu1_all4_bin05.log"
 
     wait ${GPU0_PID}
@@ -209,7 +209,7 @@ echo ""
 echo "Outputs:"
 echo "  Fig 3 0.5s:    ${BASE_OUTPUT}/fig3_bin05"
 echo "  Fig 3 0.25s:   ${BASE_OUTPUT}/fig3_bin025"
-echo "  Fig 2B Hedy:   ${BASE_OUTPUT}/hedy_bin05, hedy_bin025"
+echo "  Fig 2B M2:   ${BASE_OUTPUT}/M2_bin05, hedy_bin025"
 echo "  Fig 2B All4:   ${BASE_OUTPUT}/all4_bin05, all4_bin025"
 echo ""
 echo "Logs: ${LOG_DIR}/"

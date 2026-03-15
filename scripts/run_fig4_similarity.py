@@ -42,7 +42,7 @@ from freemat.single_fm.viz.fig4_similarity_panels import save_similarity_panels 
 
 SESSION_OUTPUT_DIRS: Dict[str, str] = {
     "M1_0525": "single_0525_M1",
-    "hedy_0526": "single_0526_hedy",
+    "M2_0526": "single_0526_M2",
     "M2_0605": "single_0605_M2",
     "M1_0609": "single_0609_M1",
     "M1_0613": "single_0613_M1",

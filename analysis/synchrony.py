@@ -731,8 +731,8 @@ def plot_behavior_synchrony_heatmap(results: Dict, output_dir: Path,
     # Extract bank from filename_prefix
     bank_name = filename_prefix.split('_')[0] if '_' in filename_prefix else 'all'
     ax1.set_title(f'Neural Synchrony Matrix - {bank_name.upper()} Bank\n({metric_name.upper()})')
-    ax1.set_xlabel('M2 (Hedy) Behaviors')
-    ax1.set_ylabel('M1 (Hooke) Behaviors')
+    ax1.set_xlabel('M2 Behaviors')
+    ax1.set_ylabel('M1 Behaviors')
     ax1.set_xticks(range(n_behaviors))
     ax1.set_yticks(range(n_behaviors))
     ax1.set_xticklabels(behaviors, rotation=45, ha='right')
@@ -755,8 +755,8 @@ def plot_behavior_synchrony_heatmap(results: Dict, output_dir: Path,
                         fontsize=8)
     
     ax2.set_title(f'Number of Analysis Windows - {bank_name.upper()} Bank')
-    ax2.set_xlabel('M2 (Hedy) Behaviors')  
-    ax2.set_ylabel('M1 (Hooke) Behaviors')
+    ax2.set_xlabel('M2 Behaviors')  
+    ax2.set_ylabel('M1 Behaviors')
     ax2.set_xticks(range(n_behaviors))
     ax2.set_yticks(range(n_behaviors))
     ax2.set_xticklabels(behaviors, rotation=45, ha='right')
@@ -977,7 +977,7 @@ def main(config_path: str, verbose: bool = False) -> None:
         m1_neural, m1_behavior_df, m1_sec_col, m1_beh_col = load_neural_and_behavior_data(
             neural_mat_file=config['data_paths']['m1_neural_mat_file'],
             behavioral_labels_file_path=config['data_paths']['behavioral_labels_file'],
-            behavior_key_col_name_template="Hooke-Behavior",
+            behavior_key_col_name_template="M1-Behavior",
             use_multiunit=config['analysis_params']['use_multiunit'],
             bank_type=bank_type,
             ventral_deuteron_channels=config['channel_config'].get('m1_ventral', []),
@@ -995,7 +995,7 @@ def main(config_path: str, verbose: bool = False) -> None:
         m2_neural, m2_behavior_df, m2_sec_col, m2_beh_col = load_neural_and_behavior_data(
             neural_mat_file=config['data_paths']['m2_neural_mat_file'],
             behavioral_labels_file_path=config['data_paths']['behavioral_labels_file'],
-            behavior_key_col_name_template="Hedy-Behavior",
+            behavior_key_col_name_template="M2-Behavior",
             use_multiunit=config['analysis_params']['use_multiunit'],
             bank_type=bank_type,
             ventral_deuteron_channels=config['channel_config'].get('m2_ventral', []),

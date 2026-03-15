@@ -52,11 +52,11 @@ from freemat_data import load_motifs_from_session  # noqa: E402
 # ── Configuration ─────────────────────────────────────────────────────────
 
 SESSION_CONFIGS = {
-    "hedy_0526": "configs/single_fm/session_hedy_0526.yaml",
-    "hedy_0605": "configs/single_fm/session_M2_0605.yaml",
-    "hooke_0525": "configs/single_fm/session_M1_0525.yaml",
-    "hooke_0609": "configs/single_fm/session_M1_0609.yaml",
-    "hooke_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
+    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
+    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
+    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
+    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
 }
 
 # Two CEBRA model families (FLAW 1 fix: no com_z leakage for height claims)
@@ -1495,17 +1495,17 @@ def run_full_pipeline(args):
         all_results[session_key] = results
 
     # ── Cross-session stability ──
-    # M2: hedy_0526 vs hedy_0605
-    if "hedy_0526" in all_data and "hedy_0605" in all_data:
+    # M2: M2_0526 vs M2_0605
+    if "M2_0526" in all_data and "M2_0605" in all_data:
         cross_m2 = compute_cross_session_stability(
-            all_data["hedy_0526"], all_data["hedy_0605"], config,
+            all_data["M2_0526"], all_data["M2_0605"], config,
         )
         all_results["cross_session_m2"] = cross_m2
         with open(output_dir / "cross_session_m2.json", "w") as f:
             json.dump(cross_m2, f, indent=2)
 
     # M1: hooke sessions (if available)
-    hooke_keys = [k for k in sessions if "hooke" in k]
+    hooke_keys = [k for k in sessions if "M1" in k]
     if len(hooke_keys) >= 2:
         cross_m1 = compute_cross_session_stability(
             all_data[hooke_keys[0]], all_data[hooke_keys[1]], config,

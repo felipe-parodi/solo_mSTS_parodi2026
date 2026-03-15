@@ -7,7 +7,7 @@ correlates with the JS divergence of their stay-vs-switch future distributions.
 
 Usage:
     python scripts/single_fm/run_fig5_coarse_affordance.py \
-        --sessions hedy_0526 hedy_0605 \
+        --sessions M2_0526 M2_0605 \
         --output-dir results/single_fm/fig5_coarse_affordance
 
 Author: Felipe Parodi + Claude
@@ -36,7 +36,7 @@ from freemat.single_fm.encoding.fig5_coarse_affordance import (  # noqa: E402
 # ── Configuration ─────────────────────────────────────────────────────────
 
 ALL_SESSIONS: List[str] = [
-    "hedy_0526", "hedy_0605", "hooke_0525", "hooke_0609", "hooke_0613",
+    "M2_0526", "M2_0605", "M1_0525", "M1_0609", "M1_0613",
 ]
 
 # Embedding keys to test (from embeddings.npz)

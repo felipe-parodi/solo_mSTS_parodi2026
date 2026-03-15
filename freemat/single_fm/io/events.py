@@ -8,8 +8,8 @@ API and responsibilities for NB01 usage.
 Example (planned):
     >>> from freemat.single_fm.io.events import process_and_persist_events
     >>> out = process_and_persist_events(
-    ...     session_yaml="configs/single_fm/session_hedy_0526.yaml",
-    ...     out_dir="results/single_fm/session_hedy_0526/events",
+    ...     session_yaml="configs/single_fm/session_M2_0526.yaml",
+    ...     out_dir="results/single_fm/session_M2_0526/events",
     ...     pattern_config="configs/events_patterns.yaml",
     ...     prefer_logger_tag="m1",
     ... )

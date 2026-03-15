@@ -10,8 +10,8 @@ Example:
     ... )
     >>> cfg = Fig2DDecoderConfig(bin_s=0.5, cv_folds=(5, 10), n_permutations=200)
     >>> df = run_fig2d_spatial_decoding(
-    ...     session_yaml="configs/single_fm/session_hedy_0526.yaml",
-    ...     output_dir="results/single_fm/fig2d/single_0526_hedy",
+    ...     session_yaml="configs/single_fm/session_M2_0526.yaml",
+    ...     output_dir="results/single_fm/fig2d/single_0526_M2",
     ...     config=cfg,
     ... )
 """

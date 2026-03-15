@@ -1,0 +1,17 @@
+# Session config for M2 240526 (asocial)
+# Paths are relative to DATA_ROOT (env var) or repo_root/data/
+session_id: M2_0526
+
+data_files:
+  pose3d_npz: 240526-M2/pose3d_smoothed.npz
+  M2_neural: 240526-M2/Neural_data_sorted_final.mat
+  syncmap_json: 240526-M2/sync_map.json
+  motifs_dir: motifs
+  antenna_json: configs/antenna_M2_0526.json
+
+metadata:
+  animal: M2
+  date: "2024-05-26"
+  session_type: asocial
+  fps: 40.0
+  ethogram_session_id: "240526-M2"

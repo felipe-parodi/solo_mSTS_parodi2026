@@ -48,11 +48,11 @@ DEFAULT_MOTIFS_DIR = (
 DEFAULT_OUTPUT_DIR = _PROJECT_ROOT / "results" / "single_fm" / "fig4_bank_similarity"
 
 SESSION_DIRS: Dict[str, str] = {
-    "hedy_0526": "single_0526_hedy",
-    "hedy_0605": "single_0605_M2",
-    "hooke_0525": "single_0525_M1",
-    "hooke_0609": "single_0609_M1",
-    "hooke_0613": "single_0613_M1",
+    "M2_0526": "single_0526_M2",
+    "M2_0605": "single_0605_M2",
+    "M1_0525": "single_0525_M1",
+    "M1_0609": "single_0609_M1",
+    "M1_0613": "single_0613_M1",
 }
 
 

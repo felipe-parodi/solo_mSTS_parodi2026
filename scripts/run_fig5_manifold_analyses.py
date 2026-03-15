@@ -10,7 +10,7 @@ Analyses:
 
 Usage:
     python scripts/single_fm/run_fig5_manifold_analyses.py
-    python scripts/single_fm/run_fig5_manifold_analyses.py --sessions hedy_0526 --n-perm 50
+    python scripts/single_fm/run_fig5_manifold_analyses.py --sessions M2_0526 --n-perm 50
 """
 from __future__ import annotations
 

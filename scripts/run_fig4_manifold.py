@@ -8,11 +8,11 @@ and block-shuffle null distribution.
 Usage:
     # Quick pilot on one session
     python scripts/single_fm/run_fig4_manifold.py \
-        --output-dir results/single_fm/fig4_manifold --sessions hedy_0526 --quick
+        --output-dir results/single_fm/fig4_manifold --sessions M2_0526 --quick
 
     # PCA-only (no umap-learn required)
     python scripts/single_fm/run_fig4_manifold.py \
-        --output-dir results/single_fm/fig4_manifold --sessions hedy_0526 --no-umap
+        --output-dir results/single_fm/fig4_manifold --sessions M2_0526 --no-umap
 
     # Full run on all sessions
     python scripts/single_fm/run_fig4_manifold.py \
@@ -44,7 +44,7 @@ if str(_PROJECT_ROOT) not in sys.path:
 # imports are fragile for batch scripts).
 SESSIONS: Dict[str, str] = {
     "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "hedy_0526": "configs/single_fm/session_hedy_0526.yaml",
+    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
     "M2_0605": "configs/single_fm/session_M2_0605.yaml",
     "M1_0609": "configs/single_fm/session_M1_0609.yaml",
     "M1_0613": "configs/single_fm/session_M1_0613.yaml",
@@ -52,7 +52,7 @@ SESSIONS: Dict[str, str] = {
 
 SESSION_OUTPUT_DIRS: Dict[str, str] = {
     "M1_0525": "single_0525_M1",
-    "hedy_0526": "single_0526_hedy",
+    "M2_0526": "single_0526_M2",
     "M2_0605": "single_0605_M2",
     "M1_0609": "single_0609_M1",
     "M1_0613": "single_0613_M1",
@@ -86,7 +86,7 @@ def run_session_manifold(
     """Run manifold analysis for a single session.
 
     Args:
-        session_key: Session identifier (e.g. 'hedy_0526').
+        session_key: Session identifier (e.g. 'M2_0526').
         config_path: Path to session YAML config.
         output_dir: Output directory for this session.
         bin_s: Bin width in seconds.
