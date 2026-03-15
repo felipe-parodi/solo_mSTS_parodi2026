@@ -176,7 +176,6 @@ def decode_syllables(
                 class_weight="balanced",
                 max_iter=1000,
                 random_state=config.random_state,
-                multi_class="multinomial",
                 solver="lbfgs",
             )
         else:

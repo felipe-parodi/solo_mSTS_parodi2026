@@ -402,7 +402,6 @@ def _decode_accuracy(
             class_weight=config.class_weight,
             max_iter=config.max_iter,
             random_state=config.random_state,
-            multi_class="multinomial",
             solver="lbfgs",
         )
         classifier.fit(x_train_fit, y_train_fit)

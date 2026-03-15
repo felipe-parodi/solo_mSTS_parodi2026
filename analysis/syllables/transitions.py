@@ -391,7 +391,6 @@ def compute_next_syllable_accuracy(
             class_weight="balanced",
             max_iter=500,
             random_state=42,
-            multi_class="multinomial",
             solver="lbfgs",
         )
 
