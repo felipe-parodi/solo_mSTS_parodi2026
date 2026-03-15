@@ -17,11 +17,16 @@ import numpy as np
 from scipy import stats
 from scipy.spatial.distance import pdist, squareform
 
-from freemat.single_fm.viz.pub_data import (
-    ALL_SESSIONS,
-    DEFAULT_FIG5_DIR,
-    load_fig5_embeddings,
-)
+try:
+    from freemat.single_fm.viz.pub_data import (
+        ALL_SESSIONS,
+        DEFAULT_FIG5_DIR,
+        load_fig5_embeddings,
+    )
+except ImportError:
+    ALL_SESSIONS = []
+    DEFAULT_FIG5_DIR = None
+    load_fig5_embeddings = None
 
 
 # ══════════════════════════════════════════════════════════════════════════
