@@ -80,15 +80,15 @@ class ControlCovariates:
         """Get control features for a specific subject.
 
         Args:
-            subject: Subject identifier ('m1', 'm2', 'hooke', 'hedy')
+            subject: Subject identifier ('m1', 'm2', 'M1', 'M2')
 
         Returns:
             Control matrix of shape (n_bins, n_features)
         """
         subject = subject.lower()
-        if subject in ("m1", "hooke"):
+        if subject in ("m1", "M1"):
             return self.all_features_m1
-        elif subject in ("m2", "hedy"):
+        elif subject in ("m2", "M2"):
             return self.all_features_m2
         else:
             raise ValueError(f"Unknown subject: {subject}")
@@ -220,7 +220,7 @@ def build_control_covariates(
 
     Example:
         >>> controls = build_control_covariates(n_bins=7200, bin_size_sec=1.0)
-        >>> X_ctrl = controls.get_for_subject('hooke')  # shape (7200, n_features)
+        >>> X_ctrl = controls.get_for_subject('M1')  # shape (7200, n_features)
     """
     # For now, use mock data
     # TODO: Implement real pose feature extraction when pose data is available
@@ -271,7 +271,7 @@ def residualize_on_controls(
     Args:
         X: Neural data, shape (n_bins, n_units)
         controls: ControlCovariates object
-        subject: Subject identifier ('m1', 'm2', 'hooke', 'hedy')
+        subject: Subject identifier ('m1', 'm2', 'M1', 'M2')
         train_mask: Boolean mask for training samples (fit on True, predict all)
         ridge_alpha: Ridge regularization strength
 
@@ -282,7 +282,7 @@ def residualize_on_controls(
         >>> X_resid = residualize_on_controls(
         ...     X=neural_rates,
         ...     controls=controls,
-        ...     subject='hooke',
+        ...     subject='M1',
         ...     train_mask=train_indices,
         ... )
     """

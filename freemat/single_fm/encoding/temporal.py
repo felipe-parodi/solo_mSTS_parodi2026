@@ -248,7 +248,7 @@ def run_subsample_sensitivity(
     """Run subsample sensitivity analysis for coverage confound control.
 
     This addresses the coverage confound where sessions have different amounts
-    of on-floor time (e.g., Hedy ~80% vs Hooke ~30%), leading to unequal bin
+    of on-floor time (e.g., M2 ~80% vs M1 ~30%), leading to unequal bin
     counts. By subsampling each session to the minimum bin count, we can assess
     whether results are robust to this imbalance.
 

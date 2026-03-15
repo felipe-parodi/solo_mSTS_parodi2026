@@ -41,7 +41,7 @@ Usage:
         neural_rates=X,
         imbalance=imbalance,
         controls=control_covariates,
-        subject='hooke',
+        subject='M1',
     )
 """
 

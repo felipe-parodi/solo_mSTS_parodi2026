@@ -9,13 +9,13 @@ encoding.
 Usage:
     # Smoke test (1 session, 20 perms)
     python scripts/single_fm/run_fig2b_temporal_split_control.py \
-        --sessions hedy_0526 --n-perm 20 \
+        --sessions M2_0526 --n-perm 20 \
         --output-dir results/single_fm/temporal_split_smoke \
         --use-gpu --debug
 
     # Full production (all 5 sessions, 100 perms)
     python scripts/single_fm/run_fig2b_temporal_split_control.py \
-        --sessions hedy_0526 hedy_0605 hooke_0525 hooke_0609 hooke_0613 \
+        --sessions M2_0526 M2_0605 M1_0525 M1_0609 M1_0613 \
         --n-perm 100 --n-perm-null 0 \
         --baseline-dir results/single_fm/production_20260209_2301/all4_bin05 \
         --output-dir results/single_fm/temporal_split_control \
@@ -49,28 +49,28 @@ _CANONICAL_TSV = str(_PROJECT_ROOT / "docs" / "inf_start_stop_times.tsv")
 
 # Session configuration mapping (matches run_rssi_control.py)
 SESSIONS: Dict[str, str] = {
-    "hedy_0526": "configs/single_fm/session_hedy_0526.yaml",
-    "hedy_0605": "configs/single_fm/session_M2_0605.yaml",
-    "hooke_0525": "configs/single_fm/session_M1_0525.yaml",
-    "hooke_0609": "configs/single_fm/session_M1_0609.yaml",
-    "hooke_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
+    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
+    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
+    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
+    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
 }
 
 SESSION_OUTPUT_DIRS: Dict[str, str] = {
-    "hedy_0526": "single_0526_hedy",
-    "hedy_0605": "single_0605_M2",
-    "hooke_0525": "single_0525_M1",
-    "hooke_0609": "single_0609_M1",
-    "hooke_0613": "single_0613_M1",
+    "M2_0526": "single_0526_M2",
+    "M2_0605": "single_0605_M2",
+    "M1_0525": "single_0525_M1",
+    "M1_0609": "single_0609_M1",
+    "M1_0613": "single_0613_M1",
 }
 
 # Map session keys to TSV date keys (YYMMDD)
 SESSION_DATES: Dict[str, str] = {
-    "hedy_0526": "240526",
-    "hedy_0605": "240605",
-    "hooke_0525": "240525",
-    "hooke_0609": "240609",
-    "hooke_0613": "240613",
+    "M2_0526": "240526",
+    "M2_0605": "240605",
+    "M1_0525": "240525",
+    "M1_0609": "240609",
+    "M1_0613": "240613",
 }
 
 # Feature groups to compare
@@ -165,7 +165,7 @@ def generate_split_tsvs(
     and writes two TSV files with the early and late windows.
 
     Args:
-        sess_key: Session key (e.g., ``"hedy_0526"``).
+        sess_key: Session key (e.g., ``"M2_0526"``).
         output_dir: Directory to write TSV files.
         split_frac: Fraction of session for early half.
 
@@ -844,7 +844,7 @@ def main() -> None:
           f"(from {len(early_cat)} early + {len(late_cat)} late)")
 
     # Per-session metrics
-    # session_id in parquet is the raw value from YAML (e.g., "hedy_0526").
+    # session_id in parquet is the raw value from YAML (e.g., "M2_0526").
     # Build exact lookup: session_key -> set of session_id values in that key's data.
     sess_id_unique = set(all_merged["session_id"].unique())
     print(f"  session_ids in merged data: {sorted(sess_id_unique)}")
@@ -875,10 +875,10 @@ def main() -> None:
             m = compute_paired_metrics(sess_merged, sess_key)
             summary_rows.append(m)
 
-    # Per-subject metrics (Hedy = hedy_*, Hooke = hooke_*)
+    # Per-subject metrics (M2 = hedy_*, M1 = hooke_*)
     SUBJECT_SESSIONS: Dict[str, List[str]] = {
-        "Hedy": [k for k in sessions_to_run if k.startswith("hedy")],
-        "Hooke": [k for k in sessions_to_run if k.startswith("hooke")],
+        "M2": [k for k in sessions_to_run if k.startswith("M2")],
+        "M1": [k for k in sessions_to_run if k.startswith("M1")],
     }
     for subj, subj_sessions in SUBJECT_SESSIONS.items():
         if not subj_sessions:
@@ -899,7 +899,7 @@ def main() -> None:
     # ── Duplicate guard ─────────────────────────────────────────────────
     # Fail loud if two different session labels produce identical metrics
     # (prevents silently publishing duplicated summary artifacts).
-    per_session_rows = [r for r in summary_rows if r["label"] not in ("pooled", "Hedy", "Hooke")]
+    per_session_rows = [r for r in summary_rows if r["label"] not in ("pooled", "M2", "M1")]
     for i, r1 in enumerate(per_session_rows):
         for r2 in per_session_rows[i + 1:]:
             if r1["label"] != r2["label"] and r1["n_paired"] == r2["n_paired"]:
@@ -969,13 +969,13 @@ def main() -> None:
     # Per-session
     for row in summary_rows:
         label = row.get("label", "?")
-        if label not in ("pooled", "Hedy", "Hooke"):
+        if label not in ("pooled", "M2", "M1"):
             _print_metrics_block(row, label)
 
     # Per-subject
     for row in summary_rows:
         label = row.get("label", "?")
-        if label in ("Hedy", "Hooke"):
+        if label in ("M2", "M1"):
             _print_metrics_block(row, label)
 
     # Pooled

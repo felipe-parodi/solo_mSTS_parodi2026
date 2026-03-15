@@ -40,11 +40,11 @@ from freemat.single_fm.viz.pub_data import load_fig5_embeddings  # noqa: E402
 # -- Session configs ------------------------------------------------------
 
 SESSION_CONFIGS: Dict[str, str] = {
-    "hedy_0526": "configs/single_fm/session_hedy_0526.yaml",
-    "hedy_0605": "configs/single_fm/session_M2_0605.yaml",
-    "hooke_0525": "configs/single_fm/session_M1_0525.yaml",
-    "hooke_0609": "configs/single_fm/session_M1_0609.yaml",
-    "hooke_0613": "configs/single_fm/session_M1_0613.yaml",
+    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
+    "M2_0605": "configs/single_fm/session_M2_0605.yaml",
+    "M1_0525": "configs/single_fm/session_M1_0525.yaml",
+    "M1_0609": "configs/single_fm/session_M1_0609.yaml",
+    "M1_0613": "configs/single_fm/session_M1_0613.yaml",
 }
 
 ALL_SESSIONS: List[str] = list(SESSION_CONFIGS.keys())

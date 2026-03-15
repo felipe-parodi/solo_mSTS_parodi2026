@@ -1,14 +1,14 @@
 {
-  "session": "hooke_0609",
+  "session": "M1_0613",
   "position_encoding_frame_m": [
-    0.0237,
-    0.5822,
-    1.2435
+    2.8732,
+    -0.3252,
+    0.1593
   ],
   "position_rotated_world_m": [
-    0.0237,
-    -0.0717,
-    0.5822
+    2.8732,
+    -0.021,
+    -0.3252
   ],
   "encoding_frame_axes": [
     "com_x (horiz0)",
@@ -16,7 +16,7 @@
     "com_z (vert-floor)"
   ],
   "up_axis": "Y",
-  "floor_level_m": -1.3152,
+  "floor_level_m": -0.1803,
   "coordinate_frame": "encoding",
-  "annotated_utc": "2026-02-12T20:19:15Z"
+  "annotated_utc": "2026-02-12T20:26:16Z"
 }

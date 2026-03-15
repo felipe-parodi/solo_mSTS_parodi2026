@@ -4,7 +4,7 @@ from __future__ import annotations
 
 Implements a typed loader that reads the canonical dual-monkey CSV schema:
 
-    Time-Hooke, Hooke-Behavior, Time-Hedy, Hedy-Behavior
+    Time-M1, M1-Behavior, Time-M2, M2-Behavior
 
 Times may be expressed as H:M:S, M:S, or commonly misformatted entries such as
 "24:10:00" that indicate 24 minutes 10 seconds. This module applies strict,
@@ -228,55 +228,55 @@ def load_behavior_states_from_csv(
     """Load behavioral states from a dual-subject CSV into StateSeries objects.
 
     Args:
-        csv_path: Path to CSV with columns: Time-Hooke, Hooke-Behavior,
-            Time-Hedy, Hedy-Behavior.
+        csv_path: Path to CSV with columns: Time-M1, M1-Behavior,
+            Time-M2, M2-Behavior.
         excludes: Labels to drop after normalization (default excludes misc).
         subject_map: Optional mapping from CSV subject names to output keys.
-            Example: {"Hooke": "m1", "Hedy": "m2"}.
+            Example: {"M1": "m1", "M2": "m2"}.
 
     Returns:
         Dict mapping subject key → StateSeries.
     """
     df = pd.read_csv(csv_path)
     cols = set(df.columns.astype(str))
-    need = {"Time-Hooke", "Hooke-Behavior", "Time-Hedy", "Hedy-Behavior"}
+    need = {"Time-M1", "M1-Behavior", "Time-M2", "M2-Behavior"}
     missing = need - cols
     if missing:
         raise ValueError(f"Behavior CSV missing required columns: {sorted(missing)}")
 
-    # Default subject mapping (Hooke→m1, Hedy→m2)
-    sub_map = subject_map or {"Hooke": "m1", "Hedy": "m2"}
+    # Default subject mapping (M1→m1, M2→m2)
+    sub_map = subject_map or {"M1": "m1", "M2": "m2"}
     out: Dict[str, StateSeries] = {}
 
-    # Hooke
+    # M1
     hooke = _build_states_for_subject(
         df,
-        time_col="Time-Hooke",
-        label_col="Hooke-Behavior",
+        time_col="Time-M1",
+        label_col="M1-Behavior",
         excludes=excludes,
     )
     hooke.meta = {
         **(hooke.meta or {}),
         "source": csv_path,
-        "subject": "Hooke",
-        "tag": sub_map.get("Hooke", "m1"),
+        "subject": "M1",
+        "tag": sub_map.get("M1", "m1"),
     }
-    out[sub_map.get("Hooke", "m1")] = hooke
+    out[sub_map.get("M1", "m1")] = hooke
 
-    # Hedy
+    # M2
     hedy = _build_states_for_subject(
         df,
-        time_col="Time-Hedy",
-        label_col="Hedy-Behavior",
+        time_col="Time-M2",
+        label_col="M2-Behavior",
         excludes=excludes,
     )
     hedy.meta = {
         **(hedy.meta or {}),
         "source": csv_path,
-        "subject": "Hedy",
-        "tag": sub_map.get("Hedy", "m2"),
+        "subject": "M2",
+        "tag": sub_map.get("M2", "m2"),
     }
-    out[sub_map.get("Hedy", "m2")] = hedy
+    out[sub_map.get("M2", "m2")] = hedy
 
     return out
 
@@ -300,5 +300,5 @@ def load_behavior_states_from_session(session: SessionRef) -> Dict[str, StateSer
     if not csv_path:
         raise FileNotFoundError("Session is missing 'behavior_csv' in data_files or metadata")
     return load_behavior_states_from_csv(
-        str(csv_path), subject_map={"Hooke": "m1", "Hedy": "m2"}
+        str(csv_path), subject_map={"M1": "m1", "M2": "m2"}
     )

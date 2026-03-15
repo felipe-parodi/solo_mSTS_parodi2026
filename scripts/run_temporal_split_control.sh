@@ -4,7 +4,7 @@
 #
 # Splits each session chronologically into early/late halves and re-runs
 # the full Fig 2 encoding pipeline on each half. Reports per-session,
-# per-subject (Hedy/Hooke), and pooled stability metrics.
+# per-subject (M2/M1), and pooled stability metrics.
 #
 # Run from the project root via Git Bash on Windows:
 #
@@ -25,7 +25,7 @@ PROD_DIR="results/single_fm/temporal_split_control"
 LOGFILE="$PROD_DIR/temporal_split_control.log"
 mkdir -p "$PROD_DIR"
 
-SESSIONS="hedy_0526 hedy_0605 hooke_0525 hooke_0609 hooke_0613"
+SESSIONS="M2_0526 M2_0605 M1_0525 M1_0609 M1_0613"
 
 echo "========================================================================"
 echo "  TEMPORAL SPLIT-HALF CONTROL - $(date)"

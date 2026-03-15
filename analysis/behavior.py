@@ -45,10 +45,10 @@ Example:
     >>> )
     >>>
     >>> # Get transition probabilities
-    >>> trans_matrix, behaviors = analyzer.get_transition_matrix('Hooke')
+    >>> trans_matrix, behaviors = analyzer.get_transition_matrix('M1')
     >>>
     >>> # Calculate state durations
-    >>> durations = analyzer.calculate_state_durations('Hooke')
+    >>> durations = analyzer.calculate_state_durations('M1')
 """
 
 import re
@@ -74,8 +74,8 @@ class BehaviorAnalyzer:
     behavioral patterns, exclusivity, transitions, and neural alignment.
     
     Attributes:
-        hooke_df: DataFrame containing Hooke's behavioral data
-        hedy_df: DataFrame containing Hedy's behavioral data
+        hooke_df: DataFrame containing M1's behavioral data
+        hedy_df: DataFrame containing M2's behavioral data
         behaviors: List of unique behaviors across both monkeys
         exclude_behaviors: Set of behaviors to exclude from analysis
         neural_data: Optional neural data for aligned analysis
@@ -88,8 +88,8 @@ class BehaviorAnalyzer:
         Initialize the BehaviorAnalyzer.
         
         Args:
-            hooke_df: Optional DataFrame with Hooke's behavioral data
-            hedy_df: Optional DataFrame with Hedy's behavioral data
+            hooke_df: Optional DataFrame with M1's behavioral data
+            hedy_df: Optional DataFrame with M2's behavioral data
         """
         self.hooke_df = hooke_df
         self.hedy_df = hedy_df
@@ -141,9 +141,9 @@ class BehaviorAnalyzer:
             
             # Find columns for each monkey
             hooke_cols = [col for col in pl_df.columns 
-                         if 'hooke' in col.lower()]
+                         if 'M1' in col.lower()]
             hedy_cols = [col for col in pl_df.columns 
-                        if 'hedy' in col.lower()]
+                        if 'M2' in col.lower()]
             
             if hooke_cols:
                 self.hooke_df = pl_df.select(hooke_cols)
@@ -374,12 +374,12 @@ class BehaviorAnalyzer:
         Calculate duration of each behavioral state.
         
         Args:
-            monkey: 'Hooke' or 'Hedy'
+            monkey: 'M1' or 'M2'
             
         Returns:
             Dictionary mapping behaviors to list of durations (seconds)
         """
-        df = self.hooke_df if monkey.lower() == 'hooke' else self.hedy_df
+        df = self.hooke_df if monkey.lower() == 'M1' else self.hedy_df
         
         if df is None:
             return {}
@@ -436,7 +436,7 @@ class BehaviorAnalyzer:
         Calculate proportion of time spent in each behavior.
         
         Args:
-            monkey: 'Hooke' or 'Hedy'
+            monkey: 'M1' or 'M2'
             
         Returns:
             Dictionary mapping behaviors to proportions (0-1)
@@ -474,14 +474,14 @@ class BehaviorAnalyzer:
                 - Diagonal P[i,i] = self-transition probability
 
         Args:
-            monkey: 'Hooke' or 'Hedy'
+            monkey: 'M1' or 'M2'
             normalize: If True, normalize rows to probabilities
 
         Returns:
             Tuple of (transition matrix shape (n_behaviors, n_behaviors),
                       list of behavior names)
         """
-        df = self.hooke_df if monkey.lower() == 'hooke' else self.hedy_df
+        df = self.hooke_df if monkey.lower() == 'M1' else self.hedy_df
         
         if df is None:
             return np.array([]), []
@@ -673,13 +673,13 @@ class BehaviorAnalyzer:
                 - Exclusivity violations
         """
         summary = {
-            'Hooke': {},
-            'Hedy': {},
+            'M1': {},
+            'M2': {},
             'Joint': {}
         }
         
         # Individual monkey statistics
-        for monkey in ['Hooke', 'Hedy']:
+        for monkey in ['M1', 'M2']:
             durations = self.calculate_state_durations(monkey)
             proportions = self.get_behavior_proportions(monkey)
             trans_matrix, behaviors = self.get_transition_matrix(monkey)
@@ -720,7 +720,7 @@ class BehaviorAnalyzer:
         """Create directed graph of behavior transitions.
         
         Args:
-            monkey: 'Hooke' or 'Hedy'
+            monkey: 'M1' or 'M2'
             
         Returns:
             NetworkX directed graph with behaviors as nodes and
@@ -747,7 +747,7 @@ class BehaviorAnalyzer:
         durations show stationarity (no trend over time).
         
         Args:
-            monkey: 'Hooke' or 'Hedy'
+            monkey: 'M1' or 'M2'
             
         Returns:
             Dict mapping behaviors to test results including:
@@ -779,12 +779,12 @@ class BehaviorAnalyzer:
         """Calculate frequency (count) of each behavior.
         
         Args:
-            monkey: 'Hooke' or 'Hedy'
+            monkey: 'M1' or 'M2'
             
         Returns:
             Dictionary mapping behaviors to their occurrence counts
         """
-        df = self.hooke_df if monkey.lower() == 'hooke' else self.hedy_df
+        df = self.hooke_df if monkey.lower() == 'M1' else self.hedy_df
         
         if df is None:
             return {}
@@ -830,7 +830,7 @@ class BehaviorAnalyzer:
             Where n_switches_from_b = count of transitions OUT of behavior b.
 
         Args:
-            monkey: 'Hooke' or 'Hedy'
+            monkey: 'M1' or 'M2'
             time_window: Time window in seconds for rate normalization (default: 60s)
 
         Returns:
@@ -838,7 +838,7 @@ class BehaviorAnalyzer:
                 - Overall switch rate (switches per time_window seconds)
                 - Dict mapping behaviors to their individual switch rates
         """
-        df = self.hooke_df if monkey.lower() == 'hooke' else self.hedy_df
+        df = self.hooke_df if monkey.lower() == 'M1' else self.hedy_df
         
         if df is None:
             return 0.0, {}

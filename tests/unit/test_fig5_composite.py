@@ -56,7 +56,7 @@ def test_save_fig_transparent_default(tmp_path: Path) -> None:
 
 # ── Composite smoke test ────────────────────────────────────────────────
 
-_SESSIONS = ["hedy_0526", "hedy_0605", "hooke_0525"]
+_SESSIONS = ["M2_0526", "M2_0605", "M1_0525"]
 
 
 def _make_session_results(rng: np.random.Generator) -> dict:
@@ -146,9 +146,9 @@ def test_fig5_composite_returns_figure() -> None:
 
     fig = fig5_composite(
         fig5_results=all_results,
-        fig5_embeddings={"hedy_0526": embeddings},
+        fig5_embeddings={"M2_0526": embeddings},
         manifold_results=manifold_results,
-        primary_session="hedy_0526",
+        primary_session="M2_0526",
     )
 
     assert isinstance(fig, plt.Figure)
@@ -163,9 +163,9 @@ def test_fig5_composite_has_panel_labels() -> None:
 
     fig = fig5_composite(
         fig5_results=all_results,
-        fig5_embeddings={"hedy_0526": embeddings},
+        fig5_embeddings={"M2_0526": embeddings},
         manifold_results=manifold_results,
-        primary_session="hedy_0526",
+        primary_session="M2_0526",
     )
 
     all_texts = [t.get_text() for t in fig.texts]
@@ -186,9 +186,9 @@ def test_fig5_syllable_ylim() -> None:
 
     fig = fig5_composite(
         fig5_results=all_results,
-        fig5_embeddings={"hedy_0526": embeddings},
+        fig5_embeddings={"M2_0526": embeddings},
         manifold_results=manifold_results,
-        primary_session="hedy_0526",
+        primary_session="M2_0526",
     )
 
     # Panel E (syllable) is the 5th axes (index 4): A, B, C, D, E

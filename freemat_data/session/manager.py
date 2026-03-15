@@ -28,7 +28,7 @@ Example:
     >>>
     >>> # Get drug condition for OT analysis
     >>> drug_info = sm.get_drug_condition('session_001')
-    >>> # {'drug': 'oxytocin', 'dosed_subject': 'hooke', 'condition': 'Social'}
+    >>> # {'drug': 'oxytocin', 'dosed_subject': 'M1', 'condition': 'Social'}
 """
 
 import csv
@@ -50,7 +50,7 @@ class DrugCondition:
         date: Session date in YYMMDD format
         condition: Experimental condition ('Social', 'Asocial', 'Baseline')
         drug: Drug administered ('oxytocin', 'saline', 'none')
-        dosed_subject: Subject who received drug ('hooke', 'hedy', 'both', 'none')
+        dosed_subject: Subject who received drug ('M1', 'M2', 'both', 'none')
     """
     date: str
     condition: str
@@ -76,7 +76,7 @@ class DrugCondition:
         """Get treatment label for a specific subject.
 
         Args:
-            subject: Subject name ('hooke' or 'hedy')
+            subject: Subject name ('M1' or 'M2')
 
         Returns:
             Treatment label: 'OT', 'saline', 'undosed_partner', or 'none'
@@ -254,10 +254,10 @@ class SessionManager:
                 subject = subject.lower() if subject else 'none'
 
                 # Handle special cases in subject field
-                if subject in ('hooke_bad', 'hooke'):
-                    subject = 'hooke'
-                elif subject in ('hedy',):
-                    subject = 'hedy'
+                if subject in ('hooke_bad', 'M1'):
+                    subject = 'M1'
+                elif subject in ('M2',):
+                    subject = 'M2'
                 elif subject in ('both',):
                     subject = 'both'
                 else:
@@ -525,10 +525,10 @@ class SessionManager:
             
             return pd.DataFrame({
                 'time': np.arange(n_samples),
-                'Hooke-Behavior': np.random.choice(behaviors, n_samples),
-                'Hedy-Behavior': np.random.choice(behaviors, n_samples),
-                'Seconds-Hooke': np.arange(n_samples),
-                'Seconds-Hedy': np.arange(n_samples)
+                'M1-Behavior': np.random.choice(behaviors, n_samples),
+                'M2-Behavior': np.random.choice(behaviors, n_samples),
+                'Seconds-M1': np.arange(n_samples),
+                'Seconds-M2': np.arange(n_samples)
             })
         
         try:

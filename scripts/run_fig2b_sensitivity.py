@@ -59,7 +59,7 @@ if str(_PROJECT_ROOT) not in sys.path:
 # Session configuration (mirrored from run_fig2b_all_sessions.py)
 SESSIONS: Dict[str, str] = {
     "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "hedy_0526": "configs/single_fm/session_hedy_0526.yaml",
+    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
     "M2_0605": "configs/single_fm/session_M2_0605.yaml",
     "M1_0609": "configs/single_fm/session_M1_0609.yaml",
     "M1_0613": "configs/single_fm/session_M1_0613.yaml",
@@ -67,7 +67,7 @@ SESSIONS: Dict[str, str] = {
 
 SESSION_OUTPUT_DIRS: Dict[str, str] = {
     "M1_0525": "single_0525_M1",
-    "hedy_0526": "single_0526_hedy",
+    "M2_0526": "single_0526_M2",
     "M2_0605": "single_0605_M2",
     "M1_0609": "single_0609_M1",
     "M1_0613": "single_0613_M1",

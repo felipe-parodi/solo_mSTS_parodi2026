@@ -6,9 +6,9 @@
 # distribution is equalized across sessions via block-matched subsampling.
 #
 # 3 tiers run sequentially:
-#   Tier 1a: Hedy within-subject (hedy_0526 + hedy_0605)
-#   Tier 1b: Hooke within-subject (hooke_0609 + hooke_0613)
-#   Tier 2+3: Cross-subject + random-size control (hedy_0526 + hooke_0613)
+#   Tier 1a: M2 within-subject (M2_0526 + M2_0605)
+#   Tier 1b: M1 within-subject (M1_0609 + M1_0613)
+#   Tier 2+3: Cross-subject + random-size control (M2_0526 + M1_0613)
 #
 # Run from project root via Git Bash on Windows:
 #
@@ -16,8 +16,8 @@
 #   bash scripts/single_fm/run_matched_subsample_all.sh
 #
 # Estimated time: ~3.5 hours
-#   Tier 1a Hedy:   ~1.8h (443+400 units, 50 reps, ~65s/rep)
-#   Tier 1b Hooke:  ~0.8h (~185 units, 50 reps, ~30s/rep)
+#   Tier 1a M2:   ~1.8h (443+400 units, 50 reps, ~65s/rep)
+#   Tier 1b M1:  ~0.8h (~185 units, 50 reps, ~30s/rep)
 #   Tier 2+3 Cross: ~1.0h (443+184 units, 50 reps matched + 50 random)
 # ==========================================================================
 
@@ -83,22 +83,22 @@ echo "========================================================================"
 echo ""
 
 # ======================================================================
-# TIER 1a: Hedy within-subject
+# TIER 1a: M2 within-subject
 # ======================================================================
 
 run_step "tier1a_hedy_within" \
     "$PYTHON" -u "$SCRIPT" \
-    --sessions hedy_0526 hedy_0605 \
+    --sessions M2_0526 M2_0605 \
     $COMMON \
     --output-dir "$PROD_DIR/hedy_within"
 
 # ======================================================================
-# TIER 1b: Hooke within-subject
+# TIER 1b: M1 within-subject
 # ======================================================================
 
 run_step "tier1b_hooke_within" \
     "$PYTHON" -u "$SCRIPT" \
-    --sessions hooke_0609 hooke_0613 \
+    --sessions M1_0609 M1_0613 \
     $COMMON \
     --output-dir "$PROD_DIR/hooke_within"
 
@@ -108,7 +108,7 @@ run_step "tier1b_hooke_within" \
 
 run_step "tier2_cross_subject" \
     "$PYTHON" -u "$SCRIPT" \
-    --sessions hedy_0526 hooke_0613 \
+    --sessions M2_0526 M1_0613 \
     --n-hist-bins 10 --block-size-s 10 --cv-folds 5 \
     $COMMON --random-size-control \
     --output-dir "$PROD_DIR/cross_subject"
@@ -144,8 +144,8 @@ echo "  Logs:    $PROD_DIR/*.log"
 echo ""
 echo "  Output structure:"
 echo "    $PROD_DIR/"
-echo "    ├── hedy_within/     # Tier 1a: Hedy within-subject"
-echo "    ├── hooke_within/    # Tier 1b: Hooke within-subject"
+echo "    ├── hedy_within/     # Tier 1a: M2 within-subject"
+echo "    ├── hooke_within/    # Tier 1b: M1 within-subject"
 echo "    ├── cross_subject/   # Tier 2+3: Cross-subject + random"
 echo "    └── *.log            # Per-step logs"
 echo ""

@@ -11,7 +11,7 @@ Usage:
     python scripts/single_fm/run_fig4_tgm.py --sessions all
 
     # Single session pilot
-    python scripts/single_fm/run_fig4_tgm.py --sessions hedy_0526
+    python scripts/single_fm/run_fig4_tgm.py --sessions M2_0526
 
     # Skip bout-duration (fastest)
     python scripts/single_fm/run_fig4_tgm.py --sessions all --skip-duration
@@ -38,7 +38,7 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 SESSIONS: Dict[str, str] = {
     "M1_0525": "configs/single_fm/session_M1_0525.yaml",
-    "hedy_0526": "configs/single_fm/session_hedy_0526.yaml",
+    "M2_0526": "configs/single_fm/session_M2_0526.yaml",
     "M2_0605": "configs/single_fm/session_M2_0605.yaml",
     "M1_0609": "configs/single_fm/session_M1_0609.yaml",
     "M1_0613": "configs/single_fm/session_M1_0613.yaml",
@@ -46,7 +46,7 @@ SESSIONS: Dict[str, str] = {
 
 SESSION_OUTPUT_DIRS: Dict[str, str] = {
     "M1_0525": "single_0525_M1",
-    "hedy_0526": "single_0526_hedy",
+    "M2_0526": "single_0526_M2",
     "M2_0605": "single_0605_M2",
     "M1_0609": "single_0609_M1",
     "M1_0613": "single_0613_M1",
@@ -63,7 +63,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--sessions", nargs="+", default=["all"],
-        help="Session keys (e.g. hedy_0526 M1_0525) or 'all'",
+        help="Session keys (e.g. M2_0526 M1_0525) or 'all'",
     )
     parser.add_argument(
         "--output-dir", default="results/single_fm/fig4_tgm",

@@ -334,7 +334,7 @@ class DataAdapter:
                     warnings.warn(f"Missing expected column: {col}")
             # Convert time strings to seconds from session start for both monkeys
             try:
-                for time_col in ['Time-Hooke', 'Time-Hedy']:
+                for time_col in ['Time-M1', 'Time-M2']:
                     if time_col in behavior_df.columns:
                         times = behavior_df[time_col].tolist()
                         if len(times) > 0:

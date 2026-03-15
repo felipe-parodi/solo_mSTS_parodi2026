@@ -210,11 +210,11 @@ def _resolve_bank_metadata(
         return unit_channels_list, bank_by_unit_list, exclude_masks
     cfg = load_banks_config(banks_path)
     bank_by_unit_list = list(map(str, map_channels_to_bank(unit_channels_np, cfg)))
-    excl_hooke = excluded_channels_for_subject("hooke", cfg)
-    excl_hedy = excluded_channels_for_subject("hedy", cfg)
+    excl_hooke = excluded_channels_for_subject("M1", cfg)
+    excl_hedy = excluded_channels_for_subject("M2", cfg)
     exclude_masks = {
-        "hooke": np.isin(unit_channels_np, np.fromiter(excl_hooke, dtype=int)).tolist(),
-        "hedy": np.isin(unit_channels_np, np.fromiter(excl_hedy, dtype=int)).tolist(),
+        "M1": np.isin(unit_channels_np, np.fromiter(excl_hooke, dtype=int)).tolist(),
+        "M2": np.isin(unit_channels_np, np.fromiter(excl_hedy, dtype=int)).tolist(),
     }
     return unit_channels_list, bank_by_unit_list, exclude_masks
 

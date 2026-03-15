@@ -16,17 +16,17 @@ After downloading, place data in `data/` with this layout:
 
 ```
 data/
-  240525-hooke/
+  240525-M1/
     Neural_data_sorted_final.mat
     pose3d_smoothed.npz
     sync_map.json
-  240526-hedy/
+  240526-M2/
     ...
-  240605-hedy/
+  240605-M2/
     ...
-  240609-hooke/
+  240609-M1/
     ...
-  240613-hooke/
+  240613-M1/
     ...
   motifs/
     ethogram_final.parquet
@@ -69,16 +69,16 @@ Pre-computed parquets contain all numbers reported in the paper. Load them direc
 
 ```python
 import pandas as pd
-fig2 = pd.read_parquet("results/production/hedy_bin05/summary/fig2b_summary.parquet")
+fig2 = pd.read_parquet("results/production/M2_bin05/summary/fig2b_summary.parquet")
 fig3 = pd.read_parquet("results/production/fig3_bin05/summary/fig3_summary.parquet")
 ```
 
 ### From raw data (full pipeline)
 
 ```bash
-# Fig 2: Encoding model (Hedy sessions, ~1h)
+# Fig 2: Encoding model (M2 sessions, ~1h)
 python scripts/run_fig2b_all_sessions.py \
-    --sessions hedy_0526 hedy_0605 --bin-width 0.5 --save-residuals
+    --sessions M2_0526 M2_0605 --bin-width 0.5 --save-residuals
 
 # Fig 3: Reference frames (all sessions, ~1h)
 python scripts/run_fig3_all_sessions.py
@@ -124,11 +124,11 @@ solo_mSTS_parodi2026/
 
 | Session | Subject | Units | Duration | FPS |
 |---------|---------|-------|----------|-----|
-| hedy_0526 | M2 (Hedy) | 443 | 40 min | 40 |
-| hedy_0605 | M2 (Hedy) | 400 | 40 min | 40 |
-| hooke_0525 | M1 (Hooke) | 186 | 31 min | 40 |
-| hooke_0609 | M1 (Hooke) | 191 | 17 min | 30 |
-| hooke_0613 | M1 (Hooke) | 184 | 37 min | 40 |
+| M2_0526 | M2 | 443 | 40 min | 40 |
+| M2_0605 | M2 | 400 | 40 min | 40 |
+| M1_0525 | M1 | 186 | 31 min | 40 |
+| M1_0609 | M1 | 191 | 17 min | 30 |
+| M1_0613 | M1 | 184 | 37 min | 40 |
 
 **Total**: 1,404 units (860 SUA + 544 MUA) across 5 sessions.
 

@@ -50,7 +50,7 @@ def load_and_align_behavioral_data(
         min_behavior_duration_sec: Minimum total duration for a behavior to be included.
 
     Returns:
-        DataFrame with columns: Time-Hooke, Hooke-Behavior, Time-Hedy, Hedy-Behavior.
+        DataFrame with columns: Time-M1, M1-Behavior, Time-M2, M2-Behavior.
         Returns None if loading fails.
     """
     if use_gpu:
@@ -111,8 +111,8 @@ def load_and_align_behavioral_data(
         return result
 
     # Get rows for each subject
-    hooke_rows = _states_to_rows(m1_states, "Time-Hooke", "Hooke-Behavior")
-    hedy_rows = _states_to_rows(m2_states, "Time-Hedy", "Hedy-Behavior")
+    hooke_rows = _states_to_rows(m1_states, "Time-M1", "M1-Behavior")
+    hedy_rows = _states_to_rows(m2_states, "Time-M2", "M2-Behavior")
 
     # Apply minimum duration filter if specified
     if min_behavior_duration_sec > 0:
@@ -124,28 +124,28 @@ def load_and_align_behavioral_data(
     max_len = max(len(hooke_rows), len(hedy_rows))
 
     df_data = {
-        "Time-Hooke": [],
-        "Hooke-Behavior": [],
-        "Time-Hedy": [],
-        "Hedy-Behavior": [],
+        "Time-M1": [],
+        "M1-Behavior": [],
+        "Time-M2": [],
+        "M2-Behavior": [],
     }
 
     for i in range(max_len):
         if i < len(hooke_rows):
             t_h, b_h = hooke_rows[i]
-            df_data["Time-Hooke"].append(_seconds_to_time_str(t_h))
-            df_data["Hooke-Behavior"].append(b_h)
+            df_data["Time-M1"].append(_seconds_to_time_str(t_h))
+            df_data["M1-Behavior"].append(b_h)
         else:
-            df_data["Time-Hooke"].append(None)
-            df_data["Hooke-Behavior"].append(None)
+            df_data["Time-M1"].append(None)
+            df_data["M1-Behavior"].append(None)
 
         if i < len(hedy_rows):
             t_d, b_d = hedy_rows[i]
-            df_data["Time-Hedy"].append(_seconds_to_time_str(t_d))
-            df_data["Hedy-Behavior"].append(b_d)
+            df_data["Time-M2"].append(_seconds_to_time_str(t_d))
+            df_data["M2-Behavior"].append(b_d)
         else:
-            df_data["Time-Hedy"].append(None)
-            df_data["Hedy-Behavior"].append(None)
+            df_data["Time-M2"].append(None)
+            df_data["M2-Behavior"].append(None)
 
     df = pd.DataFrame(df_data)
 
@@ -155,7 +155,7 @@ def load_and_align_behavioral_data(
 
     logger.info(
         f"Loaded {len(df)} behavioral events from {path} "
-        f"(Hooke: {len(hooke_rows)}, Hedy: {len(hedy_rows)})"
+        f"(M1: {len(hooke_rows)}, M2: {len(hedy_rows)})"
     )
 
     return df
@@ -237,7 +237,7 @@ def get_event_onsets(
 
     Args:
         aligned_df: DataFrame from load_and_align_behavioral_data().
-        monkey_behavior_col: Column name for behavior (e.g., 'Hooke-Behavior').
+        monkey_behavior_col: Column name for behavior (e.g., 'M1-Behavior').
         target_behavior: Behavior name to find onsets for.
 
     Returns:

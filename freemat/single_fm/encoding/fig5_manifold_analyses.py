@@ -621,7 +621,7 @@ def run_all_manifold_analyses(
     """Run all 5 manifold analyses for a single session.
 
     Args:
-        session_key: Session key (e.g., 'hedy_0526').
+        session_key: Session key (e.g., 'M2_0526').
         fig5_dir: Directory with CEBRA results.
         kin_sim_vec: Kinematic similarity vector for embedding RSA.
         n_perm: Permutations for null distributions.
@@ -726,11 +726,11 @@ def run_all_sessions(
 
     # Session dir mapping for similarity data
     _sim_dir_map = {
-        "hedy_0526": "single_0526_hedy",
-        "hedy_0605": "single_0605_M2",
-        "hooke_0525": "single_0525_M1",
-        "hooke_0609": "single_0609_M1",
-        "hooke_0613": "single_0613_M1",
+        "M2_0526": "single_0526_M2",
+        "M2_0605": "single_0605_M2",
+        "M1_0525": "single_0525_M1",
+        "M1_0609": "single_0609_M1",
+        "M1_0613": "single_0613_M1",
     }
 
     all_results: List[Dict[str, Any]] = []

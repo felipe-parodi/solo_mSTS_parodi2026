@@ -8,7 +8,7 @@
 #
 # Controls:
 #   1. RSSI + antenna nuisance (all 5 sessions in one call)
-#   2. Matched subsampling (tiered: within-Hedy, within-Hooke, cross)
+#   2. Matched subsampling (tiered: within-M2, within-M1, cross)
 #   3. Chronological split (all 5 sessions in one call)
 #
 # Run from the project root via Git Bash on Windows:
@@ -42,9 +42,9 @@ mkdir -p "$CTRL_DIR"
 
 # ── Configuration ────────────────────────────────────────────────────────
 BASELINE_DIR="results/single_fm/production_20260209_2301/all4_bin05"
-ALL_SESSIONS="hedy_0526 hedy_0605 hooke_0525 hooke_0609 hooke_0613"
-HEDY_SESSIONS="hedy_0526 hedy_0605"
-HOOKE_SESSIONS="hooke_0525 hooke_0609 hooke_0613"
+ALL_SESSIONS="M2_0526 M2_0605 M1_0525 M1_0609 M1_0613"
+HEDY_SESSIONS="M2_0526 M2_0605"
+HOOKE_SESSIONS="M1_0525 M1_0609 M1_0613"
 
 N_PERM=100
 N_PERM_NULL=0
@@ -125,7 +125,7 @@ echo ""
 echo "  CONTROL 2: Matched Subsampling (tiered)"
 echo ""
 
-# Tier 1a: Within-subject Hedy
+# Tier 1a: Within-subject M2
 run_step "matched_tier1a_hedy" \
     python scripts/single_fm/run_matched_subsample_control.py \
     --sessions $HEDY_SESSIONS \
@@ -136,7 +136,7 @@ run_step "matched_tier1a_hedy" \
     --baseline-dir "$BASELINE_DIR" \
     --output-dir "$CTRL_DIR/matched_subsample/tier1a_hedy_within"
 
-# Tier 1b: Within-subject Hooke
+# Tier 1b: Within-subject M1
 run_step "matched_tier1b_hooke" \
     python scripts/single_fm/run_matched_subsample_control.py \
     --sessions $HOOKE_SESSIONS \
@@ -206,8 +206,8 @@ echo "  Output structure:"
 echo "    $CTRL_DIR/"
 echo "    |- rssi_antenna/               # Control 1 (per-session subdirs + summary)"
 echo "    |- matched_subsample/"
-echo "    |  |- tier1a_hedy_within/       # Control 2a (Hedy within-subject)"
-echo "    |  |- tier1b_hooke_within/      # Control 2b (Hooke within-subject)"
+echo "    |  |- tier1a_hedy_within/       # Control 2a (M2 within-subject)"
+echo "    |  |- tier1b_hooke_within/      # Control 2b (M1 within-subject)"
 echo "    |  |- tier2_cross_subject/      # Control 2c (cross-subject)"
 echo "    |- temporal_split/              # Control 3 (pooled + per-session + per-subject)"
 echo "    |- *.log                        # Per-step logs"

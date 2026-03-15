@@ -11,8 +11,8 @@ This is a minimal, project‑agnostic pose QC entrypoint that:
 
 Example:
     python -m freemat_data.qc.qc_pose \
-        --config configs/single_fm/session_hedy_0526.yaml \
-        --outdir results/single_fm/hedy_0526/qc \
+        --config configs/single_fm/session_M2_0526.yaml \
+        --outdir results/single_fm/M2_0526/qc \
         --min-valid-frac 0.7 --conf-thresh 0.5 --no-show
 
 Notes:
