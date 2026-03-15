@@ -37,15 +37,9 @@ from analysis.syllables.similarity import (  # noqa: E402
 )
 
 # ── Defaults ──────────────────────────────────────────────────────────────
-DEFAULT_FIG4_DIR = (
-    _PROJECT_ROOT / "results" / "single_fm"
-    / "production_20260220_2019" / "fig4_all4"
-)
-DEFAULT_MOTIFS_DIR = (
-    "C:/Users/Felipe Parodi/Documents/freemat_jan_26_asocial"
-    "/_motifs_output_40hz_optimal_260209_2141"
-)
-DEFAULT_OUTPUT_DIR = _PROJECT_ROOT / "results" / "single_fm" / "fig4_bank_similarity"
+DEFAULT_FIG4_DIR = _PROJECT_ROOT / "results" / "production" / "fig4_all4"
+DEFAULT_MOTIFS_DIR = str(_PROJECT_ROOT / "data" / "motifs")
+DEFAULT_OUTPUT_DIR = _PROJECT_ROOT / "results" / "fig4_similarity"
 
 SESSION_DIRS: Dict[str, str] = {
     "M2_0526": "single_0526_M2",

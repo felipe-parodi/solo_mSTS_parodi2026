@@ -8,7 +8,7 @@ Minimal per‑session YAML schema
 session_id: single_001             # unique ID
 project: single_fm                  # fixed
 type: asocial                       # single‑monkey
-subject: hedy                       # hedy|hooke
+subject: M2                        # M1|M2
 monkeys: [M1]
 data_files:
   m1_neural: A:/.../Neural_data_sorted.mat   # or *.npz with spike events

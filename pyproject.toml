@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "solo-msts-parodi2026"
 version = "1.0.0"
-description = "Analysis code for: Embodied state coding in the mid superior temporal sulcus of freely moving macaques"
+description = "Analysis code for: Mid-superior temporal sulcus encodes spatial context and behavioral state in freely moving macaques"
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.10"

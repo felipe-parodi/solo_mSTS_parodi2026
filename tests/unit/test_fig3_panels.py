@@ -110,6 +110,6 @@ class TestTagSuffix:
         from freemat.single_fm.viz.fig3_panels import fig3_panel_b_boxplots
 
         df = _make_synthetic_fig3()
-        fig3_panel_b_boxplots(df, tmp_path, tag="_hedy")
-        assert (tmp_path / "fig3B_boxplot_hedy.png").exists()
-        assert (tmp_path / "fig3B_boxplot_hedy.svg").exists()
+        fig3_panel_b_boxplots(df, tmp_path, tag="_M2")
+        assert (tmp_path / "fig3B_boxplot_M2.png").exists()
+        assert (tmp_path / "fig3B_boxplot_M2.svg").exists()

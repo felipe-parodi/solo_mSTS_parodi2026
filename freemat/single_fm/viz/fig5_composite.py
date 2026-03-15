@@ -1,4 +1,4 @@
-"""Figure 5 composite: 2-row panel assembly for Nature Communications.
+"""Figure 5 composite: 2-row panel assembly .
 
 Assembles 7 panels (A-G) into a single publication-ready figure using
 nested subgridspecs (outer 2x1 for rows, inner grids per row). Each
@@ -668,7 +668,7 @@ def ed_fig5_composite(
         fig5_embeddings: Embeddings dict for primary session.
         manifold_results: From ``load_manifold_results()``.
         primary_session: Session key for CEBRA-Time panel A.
-        figsize: Figure size in inches (NatComms max width).
+        figsize: Figure size in inches (publication max width).
         min_qualifying_motifs: For context coding panel B.
 
     Returns:

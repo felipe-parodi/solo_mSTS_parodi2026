@@ -1,8 +1,8 @@
 # solo_mSTS_parodi2026
 
-Analysis code for: **Embodied state coding in the mid superior temporal sulcus of freely moving macaques**
+Analysis code for: **Mid-superior temporal sulcus encodes spatial context and behavioral state in freely moving macaques**
 
-Parodi et al. (2026), *Nature Communications*
+Parodi et al. (2026)
 
 ## Overview
 

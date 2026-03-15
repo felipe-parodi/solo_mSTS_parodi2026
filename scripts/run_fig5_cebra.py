@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Figure 5: CEBRA population manifold analysis for Nature Communications revision.
+"""Figure 5: CEBRA population manifold analysis .
 
 Runs the full analysis pipeline:
   1. Session coverage audit (all 5 sessions)
@@ -1512,11 +1512,11 @@ def run_full_pipeline(args):
         with open(output_dir / "cross_session_m2.json", "w") as f:
             json.dump(cross_m2, f, indent=2)
 
-    # M1: hooke sessions (if available)
-    hooke_keys = [k for k in sessions if "M1" in k]
-    if len(hooke_keys) >= 2:
+    # M1 sessions (if available)
+    m1_keys = [k for k in sessions if "M1" in k]
+    if len(m1_keys) >= 2:
         cross_m1 = compute_cross_session_stability(
-            all_data[hooke_keys[0]], all_data[hooke_keys[1]], config,
+            all_data[m1_keys[0]], all_data[m1_keys[1]], config,
         )
         all_results["cross_session_m1"] = cross_m1
         with open(output_dir / "cross_session_m1.json", "w") as f:

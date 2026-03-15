@@ -743,7 +743,7 @@ def run_fig2b_encoding(
 
 
 def _infer_subject(session_id: str) -> str:
-    """Infer subject from session_id (hedy = M2, hooke = M1)."""
+    """Infer subject from session_id ."""
     if "M2" in session_id.lower():
         return "M2"
     return "M1"

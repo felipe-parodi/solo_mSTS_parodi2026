@@ -1,4 +1,4 @@
-"""Figure 4 composite: 6-panel assembly for Nature Communications.
+"""Figure 4 composite: 6-panel assembly .
 
 Assembles 6 panels (A-F) into a single publication-ready figure
 using nested subgridspecs (outer 2x1 for rows, inner 1x3 per row).

@@ -5,11 +5,11 @@ Runs motif tuning, decoding, and lag sweep on single-FM sessions,
 aggregates results, and saves per-session + summary outputs.
 
 Sessions (5 with ethograms):
-- M1_0525: configs/session_M1_0525.yaml (hooke)
+- M1_0525: configs/session_M1_0525.yaml (M1)
 - M2_0526: configs/session_M2_0526.yaml
-- M2_0605: configs/session_M2_0605.yaml (hedy)
-- M1_0609: configs/session_M1_0609.yaml (hooke)
-- M1_0613: configs/session_M1_0613.yaml (hooke)
+- M2_0605: configs/session_M2_0605.yaml (M2)
+- M1_0609: configs/session_M1_0609.yaml (M1)
+- M1_0613: configs/session_M1_0613.yaml (M1)
 
 Usage:
     # Quick pilot on one session (10 perms)
@@ -19,7 +19,7 @@ Usage:
 
     # M2-only production run
     python scripts/single_fm/run_fig4_all_sessions.py \
-        --output-dir results/fig4_hedy \
+        --output-dir results/fig4_M2 \
         --sessions M2_0526 M2_0605 --n-perm 1000
 
     # All 4 sessions production run
