@@ -394,8 +394,8 @@ def compute_head_kin_features(
         Dict with per-frame arrays:
             yaw_rate, pitch_rate, roll_rate, delta_yaw
     """
-    # Import from existing kin_features module (HEAD_KIN computation is unchanged)
-    from freemat.single_fm.viz.kin_features import (
+    # Import from kin_features module (HEAD_KIN computation)
+    from freemat.single_fm.features.kin_features import (
         compute_kin_features,
         KinParams,
     )

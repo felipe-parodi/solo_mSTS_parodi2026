@@ -1,6 +1,5 @@
-from __future__ import annotations
-
 """Session registry that reads configs/sessions.yaml and provides normalized views."""
+from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Any, Dict, Iterable, List, Optional
@@ -124,12 +123,41 @@ class Registry:
         return out
 
 
+def _resolve_data_root(config_path: Path) -> Path:
+    """Resolve the data root for relative path resolution.
+
+    Priority:
+        1. FREEMAT_DATA_ROOT env var (if set and exists).
+        2. <repo_root>/data/ inferred from config_path (configs/ is one level down).
+
+    Args:
+        config_path: Resolved path to session YAML (typically in configs/).
+
+    Returns:
+        Absolute path to the data root directory.
+    """
+    import os
+
+    env_root = os.environ.get("FREEMAT_DATA_ROOT")
+    if env_root:
+        env_path = Path(env_root)
+        if env_path.is_dir():
+            return env_path.resolve()
+
+    repo_root = config_path.resolve().parent.parent
+    return repo_root / "data"
+
+
 def load_session_yaml(config_path: str) -> SessionRef:
     """Load a single-session YAML into a SessionRef.
 
     Accepts either:
       - a per-session file with keys: session_id, type, monkeys, data_files, metadata
       - a multi-session file with exactly one entry under 'sessions'
+
+    Relative data_files paths are resolved against <repo>/data/ (or
+    FREEMAT_DATA_ROOT env var). Paths starting with ``configs/`` resolve
+    against repo root instead. Absolute paths pass through unchanged.
     """
     p = Path(config_path)
     if not p.exists():
@@ -149,10 +177,21 @@ def load_session_yaml(config_path: str) -> SessionRef:
         sconf = obj
 
     data_files = dict(sconf.get("data_files") or {})
+    data_root = _resolve_data_root(p)
+    repo_root = p.resolve().parent.parent
     norm_files: Dict[str, Optional[str]] = {}
     for k, v in data_files.items():
         nv = normalize(v)
-        norm_files[k] = str(nv) if nv is not None else None
+        if nv is not None:
+            nv_path = Path(str(nv))
+            if not nv_path.is_absolute():
+                if str(nv).startswith("configs/") or str(nv).startswith("configs\\"):
+                    nv_path = repo_root / nv_path
+                else:
+                    nv_path = data_root / nv_path
+            norm_files[k] = str(nv_path)
+        else:
+            norm_files[k] = None
 
     # Merge top-level fields into metadata for convenience
     meta = dict(sconf.get("metadata") or {})
