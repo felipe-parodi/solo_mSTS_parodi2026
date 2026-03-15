@@ -47,7 +47,11 @@ matplotlib.use("Agg")
 import pandas as pd  # noqa: E402
 
 from freemat.single_fm.encoding.fig3_rf_index import compute_rf_index  # noqa: E402
-from freemat.single_fm.viz.fig3_rf_panels import save_rf_index_panels  # noqa: E402
+
+try:
+    from freemat.single_fm.viz.fig3_rf_panels import save_rf_index_panels  # noqa: E402
+except ImportError:
+    save_rf_index_panels = None
 
 
 SESSIONS: Dict[str, str] = {
@@ -344,17 +348,19 @@ def _run_height_stratified_single_mode(
     print(f"[RF-height/{cut_mode}] Summary: {n_total} units ({n_interp_all} interpretable), "
           f"{len(all_stratified)} sessions")
 
-    # Height-stratified violin figure
-    from freemat.single_fm.viz.fig3_rf_panels import plot_rf_index_by_height
-
-    fig = plot_rf_index_by_height(summary_df)
-    figures_dir = summary_dir / f"figures/{cut_mode}"
-    figures_dir.mkdir(parents=True, exist_ok=True)
-    fig.savefig(figures_dir / "fig3_rf_height_stratified.png", dpi=300, bbox_inches="tight")
-    fig.savefig(figures_dir / "fig3_rf_height_stratified.svg", bbox_inches="tight")
-    import matplotlib.pyplot as plt
-    plt.close(fig)
-    print(f"[RF-height/{cut_mode}] Figures saved to {figures_dir}")
+    # Height-stratified violin figure (if viz available)
+    try:
+        from freemat.single_fm.viz.fig3_rf_panels import plot_rf_index_by_height
+        fig = plot_rf_index_by_height(summary_df)
+        figures_dir = summary_dir / f"figures/{cut_mode}"
+        figures_dir.mkdir(parents=True, exist_ok=True)
+        fig.savefig(figures_dir / "fig3_rf_height_stratified.png", dpi=300, bbox_inches="tight")
+        fig.savefig(figures_dir / "fig3_rf_height_stratified.svg", bbox_inches="tight")
+        import matplotlib.pyplot as plt
+        plt.close(fig)
+        print(f"[RF-height/{cut_mode}] Figures saved to {figures_dir}")
+    except ImportError:
+        pass
 
 
 def _run_height_stratified(
@@ -554,16 +560,18 @@ def _run_split_half(
     print(f"[RF-split] Summary: {len(summary_df)} paired units, "
           f"{len(all_wide)} sessions")
 
-    # Scatter figure
-    from freemat.single_fm.viz.fig3_rf_panels import plot_rf_split_half_scatter
-
-    fig = plot_rf_split_half_scatter(summary_df)
-    figures_dir = summary_dir / "figures"
-    figures_dir.mkdir(parents=True, exist_ok=True)
-    fig.savefig(figures_dir / "fig3_rf_split_half_scatter.png", dpi=300, bbox_inches="tight")
-    fig.savefig(figures_dir / "fig3_rf_split_half_scatter.svg", bbox_inches="tight")
-    import matplotlib.pyplot as plt
-    plt.close(fig)
+    # Scatter figure (if viz available)
+    try:
+        from freemat.single_fm.viz.fig3_rf_panels import plot_rf_split_half_scatter
+        fig = plot_rf_split_half_scatter(summary_df)
+        figures_dir = summary_dir / "figures"
+        figures_dir.mkdir(parents=True, exist_ok=True)
+        fig.savefig(figures_dir / "fig3_rf_split_half_scatter.png", dpi=300, bbox_inches="tight")
+        fig.savefig(figures_dir / "fig3_rf_split_half_scatter.svg", bbox_inches="tight")
+        import matplotlib.pyplot as plt
+        plt.close(fig)
+    except ImportError:
+        pass
     print(f"[RF-split] Figures saved to {figures_dir}")
 
 
@@ -645,10 +653,13 @@ def main() -> None:
     summary_df.to_parquet(summary_dir / "fig3_rf_index_all.parquet", index=False)
     print(f"[RF-index] Summary: {len(summary_df)} units across {len(all_dfs)} sessions")
 
-    # Figures
-    figures_dir = summary_dir / "figures"
-    save_rf_index_panels(summary_df, str(figures_dir), split_by_bank="bank" in summary_df.columns)
-    print(f"[RF-index] Figures saved to {figures_dir}")
+    # Figures (if viz modules available)
+    if save_rf_index_panels is not None:
+        figures_dir = summary_dir / "figures"
+        save_rf_index_panels(summary_df, str(figures_dir), split_by_bank="bank" in summary_df.columns)
+        print(f"[RF-index] Figures saved to {figures_dir}")
+    else:
+        print("[RF-index] Skipping figures (viz modules not available)")
 
     if args.height_stratify:
         print("\n[RF-index] Running height-stratified analysis...")
