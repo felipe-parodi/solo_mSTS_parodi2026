@@ -1,0 +1,45 @@
+# Arena Wall Camera Assignments
+#
+# This file defines which cameras are on each wall of the hexagonal arena.
+# Camera names match calibration PKL format (Cam_001, Cam_002, etc.)
+#
+# Usage:
+# 1. Run viser_pose to visualize camera positions
+# 2. Identify which cameras belong to each wall (CCW from wall_0)
+# 3. Fill in camera lists below
+# 4. Wall plane learning will compute plane equations from camera positions
+#
+# Convention:
+# - Walls numbered 0-5, counter-clockwise when viewed from above
+# - wall_0 is arbitrary starting point (pick one wall as reference)
+# - ~5 cameras per wall (varies based on setup)
+# - Floor cameras excluded (they define the floor plane, not walls)
+
+arena:
+  shape: hexagon
+  n_walls: 6
+
+  # Wall camera assignments (TO BE FILLED after viser inspection)
+  # Format: wall_N: ["Cam_XXX", "Cam_YYY", ...]
+  wall_cameras:
+    wall_0: [Cam_004, Cam_006, Cam_017, Cam_020]  # tube wall
+    wall_1:  # door wall
+      - Cam_003   # midtier-left
+      - Cam_008   # midtier-right
+      - Cam_010   # top right
+      - Cam_013   # bottom left
+      - Cam_018   # top left
+      - Cam_024   # bottom right
+    wall_2: [Cam_007, Cam_009, Cam_021, Cam_022]
+    wall_3: [Cam_012, Cam_016, Cam_023, Cam_027] 
+    wall_4: [Cam_002, Cam_005, Cam_025, Cam_026, Cam_028]
+    wall_5: [Cam_001, Cam_011, Cam_014, Cam_015, Cam_019] 
+
+  # Floor cameras (for reference - these define floor, not walls)
+  # These should match ground_bottom_prefixes from session configs
+  floor_cameras: []  # TODO: copy from session config if needed
+
+# Notes:
+# - Camera positions come from calibration PKL
+# - Wall normals will be computed perpendicular to floor, pointing inward
+# - d_front = distance from monkey COM to wall along gaze direction

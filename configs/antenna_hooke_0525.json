@@ -1,0 +1,22 @@
+{
+  "session": "hooke_0525",
+  "position_encoding_frame_m": [
+    2.9191,
+    0.3387,
+    1.2481
+  ],
+  "position_rotated_world_m": [
+    2.9191,
+    0.0511,
+    0.3387
+  ],
+  "encoding_frame_axes": [
+    "com_x (horiz0)",
+    "com_y (horiz1)",
+    "com_z (vert-floor)"
+  ],
+  "up_axis": "Y",
+  "floor_level_m": -1.197,
+  "coordinate_frame": "encoding",
+  "annotated_utc": "2026-02-12T20:17:09Z"
+}
