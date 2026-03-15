@@ -39,18 +39,12 @@ Key analyses:
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Tuple, Any
+from dataclasses import dataclass
+from typing import Dict, List, Optional
 
 import numpy as np
 
-from analysis.decoding import (
-    StateDecoder,
-    StateDecoderConfig,
-    DecodingResult,
-    compute_metrics,
-    make_temporal_folds,
-)
+from analysis.decoding import make_temporal_folds
 
 
 @dataclass
