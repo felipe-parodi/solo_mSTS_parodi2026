@@ -22,6 +22,20 @@ DEFAULT_FIG4_DIR = DEFAULT_PROD_DIR / "fig4_all4"
 DEFAULT_FIG5_DIR = _PROJECT_ROOT / "results" / "fig5_cebra"
 DEFAULT_PUB_DIR = _PROJECT_ROOT / "results" / "publication_figures"
 
+# ── Session rename (production parquets have old names) ──────────────────
+_SESSION_RENAME = {
+    "hedy_0526": "M2_0526", "hedy_0605": "M2_0605",
+    "hooke_0525": "M1_0525", "hooke_0609": "M1_0609", "hooke_0613": "M1_0613",
+}
+
+
+def _rename_sessions(df: pd.DataFrame) -> pd.DataFrame:
+    """Rename old session IDs to M1/M2 format in-place."""
+    if "session_id" in df.columns:
+        df["session_id"] = df["session_id"].replace(_SESSION_RENAME)
+    return df
+
+
 # ── Constants ────────────────────────────────────────────────────────────
 FRAME_COLORS: Dict[str, str] = {"allo": "#457B9D", "body": "#E63946", "head": "#F4A261"}
 FRAME_LABELS: Dict[str, str] = {"allo": "Allo", "body": "Body", "head": "Head"}
@@ -137,7 +151,7 @@ def load_and_merge_unit_kind(
     root = prod_dir or DEFAULT_PROD_DIR
     uk_path = root / "unit_kind_lookup.parquet"
     if uk_path.exists():
-        uk = pd.read_parquet(uk_path)
+        uk = _rename_sessions(pd.read_parquet(uk_path))
         df = df.merge(uk, on=["session_id", "unit_id"], how="left")
     return df
 
@@ -159,7 +173,7 @@ def load_fig2(
     """
     root = prod_dir or DEFAULT_PROD_DIR
     path = root / f"{scope}_bin{bin_s}" / "summary" / "fig2b_summary.parquet"
-    df = pd.read_parquet(path)
+    df = _rename_sessions(pd.read_parquet(path))
     df["subject"] = df["session_id"].map(SUBJECT_MAP)
     return load_and_merge_unit_kind(df, prod_dir=root)
 
@@ -188,7 +202,7 @@ def load_fig2d_decoders(
             path = fallback
         else:
             return pd.DataFrame()
-    return pd.read_parquet(path)
+    return _rename_sessions(pd.read_parquet(path))
 
 
 def load_fig3(
@@ -206,7 +220,7 @@ def load_fig3(
     """
     root = prod_dir or DEFAULT_PROD_DIR
     path = root / f"fig3_bin{bin_s}" / "summary" / "fig3_summary.parquet"
-    df = pd.read_parquet(path)
+    df = _rename_sessions(pd.read_parquet(path))
     df["subject"] = df["session_id"].map(SUBJECT_MAP)
     return load_and_merge_unit_kind(df, prod_dir=root)
 
@@ -246,7 +260,7 @@ def load_residuals(
     for f in files:
         session_dir = Path(f).parent.parent.name
         session_id = _DIR_TO_SESSION.get(session_dir, session_dir)
-        result[session_id] = pd.read_parquet(f)
+        result[session_id] = _rename_sessions(pd.read_parquet(f))
     return result
 
 
@@ -286,7 +300,7 @@ def load_fig3_rf_index(
     summary_path = root / "summary" / "fig3_rf_index_all.parquet"
     if not summary_path.exists():
         return pd.DataFrame()
-    df = pd.read_parquet(summary_path)
+    df = _rename_sessions(pd.read_parquet(summary_path))
     if "session_id" in df.columns:
         df["subject"] = df["session_id"].map(SUBJECT_MAP)
     return df
@@ -400,19 +414,19 @@ def load_fig4(
 
         tuning_path = sess_dir / "fig4_tuning.parquet"
         if tuning_path.exists():
-            all_tuning.append(pd.read_parquet(tuning_path))
+            all_tuning.append(_rename_sessions(pd.read_parquet(tuning_path)))
 
         dec_path = sess_dir / "fig4_decoding_summary.parquet"
         if dec_path.exists():
-            all_decoding.append(pd.read_parquet(dec_path))
+            all_decoding.append(_rename_sessions(pd.read_parquet(dec_path)))
 
         lag_path = sess_dir / "fig4_lag_sweep.parquet"
         if lag_path.exists():
-            all_lag.append(pd.read_parquet(lag_path))
+            all_lag.append(_rename_sessions(pd.read_parquet(lag_path)))
 
         next_path = sess_dir / "fig4_next_syllable.parquet"
         if next_path.exists():
-            all_next.append(pd.read_parquet(next_path))
+            all_next.append(_rename_sessions(pd.read_parquet(next_path)))
 
         null_path = sess_dir / "fig4_null_distributions.npz"
         if null_path.exists():

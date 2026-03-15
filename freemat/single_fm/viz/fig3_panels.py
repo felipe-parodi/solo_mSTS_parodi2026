@@ -83,7 +83,7 @@ def fig3_panel_b_boxplots(
     """
     fig, ax = plt.subplots(figsize=(5, 5))
     data = [winsorize(df[f"delta_r2_{f}"].dropna().values) for f in FRAMES]
-    bp = ax.boxplot(data, labels=[FRAME_LABELS[f] for f in FRAMES],
+    bp = ax.boxplot(data, tick_labels=[FRAME_LABELS[f] for f in FRAMES],
                     patch_artist=True, showfliers=False, widths=0.6)
     for patch, f in zip(bp["boxes"], FRAMES):
         patch.set_facecolor(FRAME_COLORS[f])
