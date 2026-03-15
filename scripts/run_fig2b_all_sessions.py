@@ -58,7 +58,7 @@ from typing import Dict, List, Optional
 
 # Add project root to path for imports
 _SCRIPT_DIR = Path(__file__).resolve().parent
-_PROJECT_ROOT = _SCRIPT_DIR.parent  # scripts/single_fm -> freemat_os
+_PROJECT_ROOT = _SCRIPT_DIR.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
