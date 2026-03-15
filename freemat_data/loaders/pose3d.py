@@ -41,8 +41,7 @@ def _load_npz_minimal(path: str) -> Dict[str, Any]:
 def load_pose3d(npz_path: str, *, animal: int = 0) -> Pose3D:
     """Load 3D pose from a triangulation NPZ.
 
-    Accepts NPZ files saved by freemat_vid_inference.triangulation.pose3d_io.save_pose3d_npz.
-    If that loader is not importable, falls back to a minimal np.load-based parser.
+    Accepts NPZ files with 'keypoints_3d' and 'timestamps' arrays.
     """
     if not os.path.isfile(npz_path):
         raise FileNotFoundError(npz_path)

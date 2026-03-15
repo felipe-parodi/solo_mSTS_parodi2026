@@ -4,7 +4,7 @@ from __future__ import annotations
 
 This module provides project-agnostic loaders for camera intrinsics/extrinsics
 used in triangulation visualizations and downstream analyses. It avoids runtime
-dependencies on the poyopo triangulation package by:
+dependencies on external triangulation packages by:
 
 - Preferring a JSON calibration (combined intrinsics + extrinsics) when given
 - Providing a best-effort PKL loader that can unpickle multical workspaces

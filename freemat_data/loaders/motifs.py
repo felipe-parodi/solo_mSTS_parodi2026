@@ -17,7 +17,7 @@ registry's ``data_files`` mapping:
 - ``motifs_frames_map``: optional override path to frames_map.parquet
 
 If a directory is provided, the loader expects the parquet files produced by
-``poyopo.freemat_vid_inference.motifs.cli single`` to be present. If a direct
+the motif extraction CLI to be present. If a direct
 ethogram path is given, the loader will try to find ``frames_map.parquet`` in
 the same directory to recover per-frame times; if unavailable, it will fall
 back to ``embedding.parquet`` (which contains ``t_sec``) or return a series
