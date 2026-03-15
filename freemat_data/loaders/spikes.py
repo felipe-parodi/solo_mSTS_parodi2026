@@ -607,7 +607,7 @@ def _load_spikes_npz(path: str) -> Dict[str, Any]:
 
 
 def load_spikes_events_npz(npz_path: str) -> SpikesEvents:
-    """Load spikes from NPZ; prefer torch_brain adapters if available."""
+    """Load spikes from NPZ file."""
     if not os.path.isfile(npz_path):
         raise FileNotFoundError(npz_path)
     d = _load_spikes_npz(npz_path)

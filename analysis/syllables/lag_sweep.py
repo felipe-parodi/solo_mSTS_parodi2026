@@ -214,39 +214,6 @@ def lag_sweep_decoding(
     )
 
 
-def lag_sweep_by_target(
-    X: np.ndarray,
-    y_self: np.ndarray,
-    y_partner: np.ndarray,
-    lags_bins: Optional[np.ndarray] = None,
-    bin_size_sec: float = 0.1,
-    **kwargs,
-) -> Dict[str, LagSweepResult]:
-    """Run lag sweep for both self and partner syllables.
-
-    Args:
-        X: Neural features (n_bins, n_features).
-        y_self: Self syllable labels.
-        y_partner: Partner syllable labels.
-        lags_bins: Lags to test.
-        bin_size_sec: Bin size.
-        **kwargs: Additional args for lag_sweep_decoding.
-
-    Returns:
-        Dict with 'self' and 'partner' LagSweepResult.
-    """
-    results = {}
-
-    results["self"] = lag_sweep_decoding(
-        X, y_self, lags_bins, bin_size_sec, **kwargs
-    )
-    results["partner"] = lag_sweep_decoding(
-        X, y_partner, lags_bins, bin_size_sec, **kwargs
-    )
-
-    return results
-
-
 def lag_sweep_by_bank(
     X: np.ndarray,
     y: np.ndarray,
@@ -283,28 +250,6 @@ def lag_sweep_by_bank(
     results["pooled"] = lag_sweep_decoding(X, y, lags_bins, bin_size_sec, **kwargs)
 
     return results
-
-
-def compute_lead_time_comparison(
-    result_self: LagSweepResult,
-    result_partner: LagSweepResult,
-) -> Dict[str, float]:
-    """Compare lead times between self and partner decoding.
-
-    Args:
-        result_self: Lag sweep result for self syllables.
-        result_partner: Lag sweep result for partner syllables.
-
-    Returns:
-        Dict with comparison metrics.
-    """
-    return {
-        "lead_time_self_sec": result_self.lead_time_sec,
-        "lead_time_partner_sec": result_partner.lead_time_sec,
-        "lead_time_diff_sec": result_partner.lead_time_sec - result_self.lead_time_sec,
-        "optimal_accuracy_self": result_self.optimal_accuracy,
-        "optimal_accuracy_partner": result_partner.optimal_accuracy,
-    }
 
 
 def compute_pre_onset_accuracy(
