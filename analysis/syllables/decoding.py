@@ -26,14 +26,8 @@ Core Methods:
 
         p-value = (1 + Σ_i 𝟙[null_acc_i ≥ observed_acc]) / (1 + n_perm)
 
-    Partner vs Self Weight Index:
-        WI = (acc_partner - acc_self) / (acc_partner + acc_self)
-
-        WI ∈ [-1, +1]: negative = self-dominated, positive = partner-dominated.
-
 Key analyses:
-- Self syllable decoding: Decode M1's syllable from M1's spikes
-- Partner syllable decoding: Decode M2's syllable from M1's spikes
+- Syllable decoding: Decode behavioral syllable from neural spikes
 - Model family comparison: spikes-only vs controls-only vs combined
 """
 
@@ -221,34 +215,6 @@ def decode_syllables(
     )
 
 
-def decode_self_and_partner_syllables(
-    X_spk: np.ndarray,
-    y_self: np.ndarray,
-    y_partner: np.ndarray,
-    config: Optional[SyllableDecodingConfig] = None,
-) -> Dict[str, SyllableDecodingResult]:
-    """Decode both self and partner syllables from neural activity.
-
-    Args:
-        X_spk: Neural features (n_samples, n_units).
-        y_self: Self syllable labels (n_samples,).
-        y_partner: Partner syllable labels (n_samples,).
-        config: Decoding configuration.
-
-    Returns:
-        Dict with 'self' and 'partner' SyllableDecodingResult.
-    """
-    results = {}
-
-    # Decode self syllables
-    results["self"] = decode_syllables(X_spk, y_self, config)
-
-    # Decode partner syllables
-    results["partner"] = decode_syllables(X_spk, y_partner, config)
-
-    return results
-
-
 def decode_syllables_by_bank(
     X_spk: np.ndarray,
     y: np.ndarray,
@@ -351,31 +317,3 @@ def compute_permutation_null(
     return np.array(null_accuracies)
 
 
-def compute_weight_index(
-    acc_partner: float,
-    acc_self: float,
-) -> float:
-    """Compute partner vs self weighting index.
-
-    Mathematical Definition:
-        WI = (acc_partner - acc_self) / (acc_partner + acc_self)
-
-        Interpretation:
-            WI = -1: Only self information (acc_partner = 0)
-            WI =  0: Equal self and partner information
-            WI = +1: Only partner information (acc_self = 0)
-
-        Useful for comparing ventral (expected self-dominated) vs
-        dorsal (expected partner-dominated) banks.
-
-    Args:
-        acc_partner: Partner syllable decoding accuracy ∈ [0, 1].
-        acc_self: Self syllable decoding accuracy ∈ [0, 1].
-
-    Returns:
-        Weight index in [-1, 1], or 0.0 if both accuracies are 0.
-    """
-    denom = acc_partner + acc_self
-    if denom <= 0:
-        return 0.0
-    return (acc_partner - acc_self) / denom

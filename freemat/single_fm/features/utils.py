@@ -4,9 +4,8 @@
 Provides vector math helpers, smoothing, axis helpers, and viser-compatible
 gaze computation functions used by canonical.py.
 
-The viser gaze functions are inlined (copied from
-freemat_vid_inference/triangulation/viewer/gaze_renderer.py) to keep
-canonical.py self-contained and avoid import chain issues.
+The viser gaze functions are inlined to keep canonical.py self-contained
+and avoid import chain issues.
 """
 
 from __future__ import annotations
@@ -98,8 +97,8 @@ def _get_horiz_indices(vertical_idx: int) -> tuple:
 # =============================================================================
 # Viser Gaze Functions (inlined to avoid import chain issues)
 # =============================================================================
-# These are copied from freemat_vid_inference/triangulation/viewer/gaze_renderer.py
-# to make canonical.py self-contained. They are the source of truth for VIS features.
+# Gaze rendering constants (antenna geometry).
+# These are the source of truth for VIS features.
 
 
 def _viser_shoulder_fallback(

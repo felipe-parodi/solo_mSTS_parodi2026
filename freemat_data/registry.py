@@ -56,7 +56,7 @@ class Registry:
     """Load and query session definitions across projects.
 
     This wraps the existing YAML format used by data.SessionManager and exposes
-    a minimal typed API for consumers in freemat, freemat/single, and torch_brain.
+    a minimal typed API for the analysis pipeline.
     """
 
     def __init__(self, config_path: str = "configs/sessions.yaml") -> None:
