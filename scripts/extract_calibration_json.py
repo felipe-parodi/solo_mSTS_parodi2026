@@ -21,7 +21,7 @@ from typing import Any, Dict
 import numpy as np
 
 # Repo root
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 # Add repo root and freemat_vid_inference to path
 sys.path.insert(0, str(REPO_ROOT))

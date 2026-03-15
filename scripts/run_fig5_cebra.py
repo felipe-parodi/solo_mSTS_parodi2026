@@ -41,7 +41,7 @@ from sklearn.metrics import balanced_accuracy_score  # noqa: E402
 from sklearn.neighbors import KNeighborsClassifier  # noqa: E402
 
 # Project imports
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
 from analysis.decoding.temporal_cv import make_temporal_folds  # noqa: E402, F401

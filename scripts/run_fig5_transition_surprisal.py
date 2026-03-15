@@ -28,7 +28,7 @@ import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 
 # Project imports
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
 from freemat.single_fm.data.session_loader import SingleFMSessionLoader  # noqa: E402
