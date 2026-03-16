@@ -1,0 +1,22 @@
+{
+  "session": "M2_0605",
+  "position_encoding_frame_m": [
+    3.4099,
+    -1.0867,
+    1.2387
+  ],
+  "position_rotated_world_m": [
+    3.4099,
+    -0.7555,
+    -1.0867
+  ],
+  "encoding_frame_axes": [
+    "com_x (horiz0)",
+    "com_y (horiz1)",
+    "com_z (vert-floor)"
+  ],
+  "up_axis": "Y",
+  "floor_level_m": -1.9942,
+  "coordinate_frame": "encoding",
+  "annotated_utc": "2026-02-12T20:11:44Z"
+}
